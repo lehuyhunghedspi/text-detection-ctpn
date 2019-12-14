@@ -102,6 +102,6 @@ if __name__ == '__main__':
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         print(im_name_count,len(im_names),('Demo for {:s}'.format(im_name)))
         ctpn(sess, net, im_name)
-        if im_name_count==20:
+        if im_name_count==200:
             break
 
