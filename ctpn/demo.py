@@ -95,8 +95,8 @@ if __name__ == '__main__':
     for i in range(2):
         _, _ = test_ctpn(sess, net, im)
 
-    im_names = glob.glob(os.path.join(cfg.TEST.checkpoints_path, 'test', '*.png')) + \
-               glob.glob(os.path.join(cfg.TEST.custom_data_dir, 'test', '*.jpg'))
+    im_names = glob.glob(os.path.join(cfg.DATA_DIR, 'test', '*.png')) + \
+               glob.glob(os.path.join(cfg.DATA_DIR, 'test', '*.jpg'))
 
     for im_name_count,im_name in enumerate(im_names):
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
