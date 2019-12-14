@@ -47,7 +47,7 @@ def draw_boxes(img,image_name,boxes,scale):
             f.write(line)
 
     img=cv2.resize(img, None, None, fx=1.0/scale, fy=1.0/scale, interpolation=cv2.INTER_LINEAR)
-    cv2.imwrite(os.path.join("/content/drive/My Drive/GR2/ctpn/results/", base_name), img)
+    cv2.imwrite(os.path.join("/content/drive/My Drive/GR2/ctpn/results_visualize/", base_name), img)
 
 def ctpn(sess, net, image_name):
     timer = Timer()
@@ -71,6 +71,10 @@ if __name__ == '__main__':
         shutil.rmtree("/content/drive/My Drive/GR2/ctpn/results/")
         print("====== remove result folder =======")
     os.makedirs("/content/drive/My Drive/GR2/ctpn/results/")
+    if os.path.exists("/content/drive/My Drive/GR2/ctpn/results_visualize/"):
+        shutil.rmtree("/content/drive/My Drive/GR2/ctpn/results_visualize/")
+        print("====== remove result folder results_visualize=======")
+    os.makedirs("/content/drive/My Drive/GR2/ctpn/results_visualize/")
 
     cfg_from_file('/content/text-detection-ctpn/ctpn/text.yml')
 
