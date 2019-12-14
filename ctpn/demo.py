@@ -98,8 +98,10 @@ if __name__ == '__main__':
     im_names = glob.glob(os.path.join(cfg.TEST.checkpoints_path, 'test', '*.png')) + \
                glob.glob(os.path.join(cfg.TEST.custom_data_dir, 'test', '*.jpg'))
 
-    for im_name in im_names:
+    for im_name_count,im_name in enumerate(im_names):
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        print(('Demo for {:s}'.format(im_name)))
+        print(im_name_count,len(im_names),('Demo for {:s}'.format(im_name)))
         ctpn(sess, net, im_name)
+        if im_name_count==20:
+            break
 
