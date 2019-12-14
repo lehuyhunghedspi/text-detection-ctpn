@@ -64,9 +64,10 @@ def ctpn(sess, net, image_name):
 
 
 if __name__ == '__main__':
-    if os.path.exists("/content/text-detection-ctpn/data/results/"):
-        shutil.rmtree("/content/text-detection-ctpn/data/results/")
-    os.makedirs("/content/text-detection-ctpn/data/results/")
+    if os.path.exists("/content/drive/My Drive/GR2/ctpn/results/"):
+        shutil.rmtree("/content/drive/My Drive/GR2/ctpn/results/")
+        print("====== remove result folder =======")
+    os.makedirs("/content/drive/My Drive/GR2/ctpn/results/")
 
     cfg_from_file('/content/text-detection-ctpn/ctpn/text.yml')
 
@@ -94,8 +95,8 @@ if __name__ == '__main__':
     for i in range(2):
         _, _ = test_ctpn(sess, net, im)
 
-    im_names = glob.glob(os.path.join(cfg.DATA_DIR, 'demo', '*.png')) + \
-               glob.glob(os.path.join(cfg.DATA_DIR, 'demo', '*.jpg'))
+    im_names = glob.glob(os.path.join(cfg.TEST.checkpoints_path, 'test', '*.png')) + \
+               glob.glob(os.path.join(cfg.TEST.custom_data_dir, 'test', '*.jpg'))
 
     for im_name in im_names:
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
