@@ -22,7 +22,7 @@ def resize_im(im, scale, max_scale=None):
 
 def draw_boxes(img,image_name,boxes,scale):
     base_name = image_name.split('/')[-1]
-    with open('data/results/' + 'res_{}.txt'.format(base_name.split('.')[0]), 'w') as f:
+    with open('/content/drive/My Drive/GR2/ctpn/results/' + 'res_{}.txt'.format(base_name.split('.')[0]), 'w') as f:
         for box in boxes:
             if np.linalg.norm(box[0] - box[1]) < 5 or np.linalg.norm(box[3] - box[0]) < 5:
                 continue
