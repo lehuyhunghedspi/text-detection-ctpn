@@ -35,5 +35,5 @@ TEST:
   HAS_RPN: True
   DETECT_MODE: H
   checkpoints_path: /content/text-detection-ctpn/checkpoints/
-  custom_data_dir: /content/drive/My Drive/GR2/converted_icdar/
+  # custom_data_dir: /content/drive/My Drive/GR2/converted_icdar/
   # checkpoints_path: output/ctpn_end2end/voc_2007_trainval
