@@ -22,7 +22,7 @@ def resize_im(im, scale, max_scale=None):
 
 def draw_boxes(img,image_name,boxes,scale):
     base_name = image_name.split('/')[-1]
-    with open('/content/drive/My Drive/GR2/ctpn/results/' + 'res_{}.txt'.format(base_name.split('.')[0]), 'w') as f:
+    with open('/content/drive/My Drive/GR2/ctpn/results/' + '{}.txt'.format(base_name.split('.')[0]), 'w') as f:
         for box in boxes:
             if np.linalg.norm(box[0] - box[1]) < 5 or np.linalg.norm(box[3] - box[0]) < 5:
                 continue
@@ -40,7 +40,10 @@ def draw_boxes(img,image_name,boxes,scale):
             max_x = max(int(box[0]/scale),int(box[2]/scale),int(box[4]/scale),int(box[6]/scale))
             max_y = max(int(box[1]/scale),int(box[3]/scale),int(box[5]/scale),int(box[7]/scale))
 
-            line = ','.join([str(min_x),str(min_y),str(max_x),str(max_y)])+'\r\n'
+            line = ','.join([str(min_x),str(min_y),
+                            str(max_x),str(min_y),
+                            str(max_x),str(max_y),
+                            str(min_x),str(max_y)])+'\r\n'
             f.write(line)
 
     img=cv2.resize(img, None, None, fx=1.0/scale, fy=1.0/scale, interpolation=cv2.INTER_LINEAR)
@@ -102,6 +105,6 @@ if __name__ == '__main__':
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         print(im_name_count,len(im_names),('Demo for {:s}'.format(im_name)))
         ctpn(sess, net, im_name)
-        if im_name_count==200:
-            break
+        # if im_name_count==200:
+        #     break
 
