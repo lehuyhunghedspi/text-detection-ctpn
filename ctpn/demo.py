@@ -44,7 +44,7 @@ def draw_boxes(img,image_name,boxes,scale):
             f.write(line)
 
     img=cv2.resize(img, None, None, fx=1.0/scale, fy=1.0/scale, interpolation=cv2.INTER_LINEAR)
-    cv2.imwrite(os.path.join("data/results", base_name), img)
+    cv2.imwrite(os.path.join("/content/drive/My Drive/GR2/ctpn/results/", base_name), img)
 
 def ctpn(sess, net, image_name):
     timer = Timer()
