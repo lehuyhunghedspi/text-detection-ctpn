@@ -80,7 +80,10 @@ if __name__ == '__main__':
     saver = tf.train.Saver()
 
     try:
+        print('==============')
+        print(cfg.TEST.checkpoints_path)
         ckpt = tf.train.get_checkpoint_state(cfg.TEST.checkpoints_path)
+        print(ckpt)
         print('Restoring from {}...'.format(ckpt.model_checkpoint_path), end=' ')
         saver.restore(sess, ckpt.model_checkpoint_path)
         print('done')
