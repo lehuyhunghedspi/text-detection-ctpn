@@ -105,7 +105,7 @@ for file in files:
 
         if not os.path.exists('/content/drive/My Drive/GR2/ctpn/label_tmp'):
             os.makedirs('/content/drive/My Drive/GR2/ctpn/label_tmp')
-        with open(os.path.join('label_tmp', stem) + '.txt', 'a') as f:
+        with open(os.path.join('/content/drive/My Drive/GR2/ctpn/label_tmp', stem) + '.txt', 'a') as f:
             for i in range(len(x_left)):
                 f.writelines("text\t")
                 f.writelines(str(int(x_left[i])))
