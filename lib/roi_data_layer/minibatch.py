@@ -58,7 +58,7 @@ def get_minibatch(roidb, num_classes):
         color = (255, 0, 0)
         print(debug_img.shape)
         with open(raw_gt_file,"r") as f:
-            raw_boxs=[[int(number) for number in line[:-1].split(',')[:-1]] for line in f.readlines()]
+            raw_boxs=[[number for number in line[:-1].split(',')[:-1]] for line in f.readlines()]
         for box in raw_boxs:
             print(box)
             cv2.line(mask, (int(box[0]), int(box[1])), (int(box[2]), int(box[3])), color, 20)
