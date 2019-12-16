@@ -19,6 +19,8 @@ for file in files:
     gt_file = os.path.join(gt_path,  stem + '.txt')
     img_path = os.path.join(path, file)
     print(img_path)
+    if not os.path.isfile(gt_file):
+        continue
     img = cv.imread(img_path)
     img_size = img.shape
     im_size_min = np.min(img_size[0:2])

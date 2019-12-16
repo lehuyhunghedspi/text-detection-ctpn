@@ -100,13 +100,13 @@ def build_voc_dirs(outdir):
 
 
 if __name__ == '__main__':
-    _outdir = 'TEXTVOC/VOC2007'
+    _outdir = '/content/drive/My Drive/GR2/ctpn/TEXTVOC/VOC2007'
     _draw = bool(0)
     _dest_label_dir, _dest_img_dir, _dest_set_dir = build_voc_dirs(_outdir)
     _doncateothers = bool(1)
     for dset in ['train']:
-        _labeldir = 'label_tmp'
-        _imagedir = 're_image'
+        _labeldir = '/content/drive/My Drive/GR2/ctpn/label_tmp'
+        _imagedir = '/content/drive/My Drive/GR2/ctpn/re_image'
         class_sets = ('text', 'dontcare')
         class_sets_dict = dict((k, i) for i, k in enumerate(class_sets))
         allclasses = {}
