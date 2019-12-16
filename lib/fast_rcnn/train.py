@@ -150,6 +150,7 @@ class SolverWrapper(object):
             # get one batch
             blobs = data_layer.forward()
 
+            print("blobs['data']",type(blobs['data']))
             feed_dict={
                 self.net.data: blobs['data'],
                 self.net.im_info: blobs['im_info'],
@@ -223,7 +224,8 @@ def train_net(network, imdb, roidb, output_dir, log_dir, pretrained_model=None, 
     config.gpu_options.allocator_type = 'BFC'
     config.gpu_options.per_process_gpu_memory_fraction = 0.75
     with tf.Session(config=config) as sess:
-        sw = SolverWrapper(sess, network, imdb, roidb, output_dir, logdir= log_dir, pretrained_model=pretrained_model)
+        sw = SolverWrapper(sess, network, imdb, roidb, output_dir,
+         logdir= log_dir, pretrained_model=pretrained_model)
         print('Solving...')
         sw.train_model(sess, max_iters, restore=restore)
         print('done solving')
