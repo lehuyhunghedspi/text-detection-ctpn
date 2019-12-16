@@ -24,6 +24,7 @@ def get_minibatch(roidb, num_classes):
     blobs = {'data': im_blob}
 
     if cfg.TRAIN.HAS_RPN:
+        print("=========  using RPN ======")
         assert len(im_scales) == 1, "Single batch only"
         assert len(roidb) == 1, "Single batch only"
         # gt boxes: (x1, y1, x2, y2, cls)
@@ -32,6 +33,7 @@ def get_minibatch(roidb, num_classes):
         gt_boxes[:, 0:4] = roidb[0]['boxes'][gt_inds, :] * im_scales[0]
         gt_boxes[:, 4] = roidb[0]['gt_classes'][gt_inds]
         blobs['gt_boxes'] = gt_boxes
+        print(gt_boxes)
         blobs['gt_ishard'] = roidb[0]['gt_ishard'][gt_inds]  \
             if 'gt_ishard' in roidb[0] else np.zeros(gt_inds.size, dtype=int)
         # blobs['gt_ishard'] = roidb[0]['gt_ishard'][gt_inds]
