@@ -48,6 +48,9 @@ def get_minibatch(roidb, num_classes):
         #create split line mask:
         print(im_blob.shape)
         mask=np.zeros(im_blob.shape)
+        print(gt_boxes.shape)
+        # for bbox in gt_boxes:
+
         print(mask.shape)
 
     else: # not using RPN
