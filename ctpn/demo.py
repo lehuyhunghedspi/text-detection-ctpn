@@ -39,7 +39,7 @@ def draw_boxes(img,image_name,boxes,scale):
             min_y = min(int(box[1]/scale),int(box[3]/scale),int(box[5]/scale),int(box[7]/scale))
             max_x = max(int(box[0]/scale),int(box[2]/scale),int(box[4]/scale),int(box[6]/scale))
             max_y = max(int(box[1]/scale),int(box[3]/scale),int(box[5]/scale),int(box[7]/scale))
-            
+
             line = ','.join([str(min_x),str(min_y),
                             str(max_x),str(min_y),
                             str(max_x),str(max_y),
@@ -93,7 +93,7 @@ if __name__ == '__main__':
         ckpt = tf.train.get_checkpoint_state(cfg.TEST.checkpoints_path)
         print(ckpt)
         # print('Restoring from {}...'.format(ckpt.model_checkpoint_path), end=' ')
-        saver.restore(sess,"/content/text-detection-ctpn/checkpoints/VGGnet_fast_rcnn_iter_10500.ckpt" )
+        saver.restore(sess,"/content/text-detection-ctpn/checkpoints/VGGnet_fast_rcnn_iter_10000.ckpt" )
         print('done')
     except:
         raise 'Check your pretrained {:s}'.format(ckpt.model_checkpoint_path)
