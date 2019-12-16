@@ -49,7 +49,8 @@ def get_minibatch(roidb, num_classes):
         print(im_blob.shape)
         mask=np.zeros(im_blob.shape)
         print(gt_boxes.shape)
-        print(gt_boxes[:,4])
+        for a in gt_boxes:
+            print(a)
         # print(im_blob[:2,:2])
         
         debug_img=im_blob.astype(int)+128
