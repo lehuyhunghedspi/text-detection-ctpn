@@ -50,8 +50,8 @@ def get_minibatch(roidb, num_classes):
         mask=np.zeros(im_blob.shape)
         print(gt_boxes.shape)
         print(gt_boxes[:,4])
-        print(im_blob[:2,:2])
-        # cv2.imwrite()
+        # print(im_blob[:2,:2])
+        cv2.imwrite('/content/debug/'+blobs['im_name'],im_blob.astype(int))
         # for bbox in gt_boxes:
 
         print(mask.shape)
