@@ -44,6 +44,7 @@ def get_minibatch(roidb, num_classes):
 
     else: # not using RPN
         # Now, build the region of interest and label blobs
+        print("========= not using RPN ======")
         rois_blob = np.zeros((0, 5), dtype=np.float32)
         labels_blob = np.zeros((0), dtype=np.float32)
         bbox_targets_blob = np.zeros((0, 4 * num_classes), dtype=np.float32)
