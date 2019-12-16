@@ -150,7 +150,7 @@ class SolverWrapper(object):
             # get one batch
             blobs = data_layer.forward()
 
-            print("blobs['data']",type(blobs['data']))
+            
             feed_dict={
                 self.net.data: blobs['data'],
                 self.net.im_info: blobs['im_info'],

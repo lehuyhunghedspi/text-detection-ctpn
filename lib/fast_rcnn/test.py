@@ -41,6 +41,7 @@ def test_ctpn(sess, net, im, boxes=None):
     blobs, im_scales = _get_blobs(im, boxes)
     if cfg.TEST.HAS_RPN:
         im_blob = blobs['data']
+        print("blobs['data']",type(blobs['data']))
         blobs['im_info'] = np.array(
             [[im_blob.shape[1], im_blob.shape[2], im_scales[0]]],
             dtype=np.float32)
