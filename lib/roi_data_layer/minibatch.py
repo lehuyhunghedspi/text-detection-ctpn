@@ -50,9 +50,12 @@ def get_minibatch(roidb, num_classes):
         mask=np.zeros(im_blob.shape)
         print(gt_boxes.shape)
         print(gt_boxes[:,4])
+        print(im_blob[:2,:2])
+        cv2.imwrite()
         # for bbox in gt_boxes:
 
         print(mask.shape)
+        exit(-1)
 
     else: # not using RPN
         # Now, build the region of interest and label blobs
