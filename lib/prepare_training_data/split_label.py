@@ -3,9 +3,9 @@ import numpy as np
 import math
 import cv2 as cv
 
-path = '/media/D/code/OCR/text-detection-ctpn/data/mlt_english+chinese/image'
-gt_path = '/media/D/code/OCR/text-detection-ctpn/data/mlt_english+chinese/label'
-out_path = 're_image'
+path = '/content/drive/My Drive/task1&2-test (361p)'
+gt_path = '/content/drive/My Drive/GR2/ctpn/label/text.task1&2-test (361p)'
+out_path = '/content/drive/My Drive/GR2/ctpn/re_image'
 if not os.path.exists(out_path):
     os.makedirs(out_path)
 files = os.listdir(path)
@@ -103,8 +103,8 @@ for file in files:
         x_left = np.delete(x_left, idx, axis=0)
         x_right = np.delete(x_right, idx, axis=0)
 
-        if not os.path.exists('label_tmp'):
-            os.makedirs('label_tmp')
+        if not os.path.exists('/content/drive/My Drive/GR2/ctpn/label_tmp'):
+            os.makedirs('/content/drive/My Drive/GR2/ctpn/label_tmp')
         with open(os.path.join('label_tmp', stem) + '.txt', 'a') as f:
             for i in range(len(x_left)):
                 f.writelines("text\t")
