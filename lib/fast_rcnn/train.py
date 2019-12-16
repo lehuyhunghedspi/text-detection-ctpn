@@ -52,7 +52,7 @@ class SolverWrapper(object):
                  if cfg.TRAIN.SNAPSHOT_INFIX != '' else '')
         filename = (cfg.TRAIN.SNAPSHOT_PREFIX + infix +
                     '_iter_{:d}'.format(iter+1) + '.ckpt')
-        filename = os.path.join(self.output_dir, filename)
+        filename = os.path.join('/content/drive/My Drive/GR2/ctpn/checkpoint_training', filename)
 
         self.saver.save(sess, filename)
         print('Wrote snapshot to: {:s}'.format(filename))
