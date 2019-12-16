@@ -47,21 +47,23 @@ def get_minibatch(roidb, num_classes):
 
         #create split line mask:
         print(im_blob.shape)
-        mask=np.zeros(im_blob.shape)
+        mask=np.zeros(im_blob.shape[1:])
         print(gt_boxes.shape)
         debug_img=im_blob.astype(int)[0]+128
         np.clip(debug_img,0,255)
         color = (255, 0, 0)
+        print(debug_img.shape)
         for box in gt_boxes:
             print(box)
-            cv2.line(debug_img, (int(box[0]), int(box[1])), (int(box[0]), int(box[3])), color, 20)
-            cv2.line(debug_img, (int(box[0]), int(box[1])), (int(box[2]), int(box[1])), color, 20)
+            cv2.line(mask, (int(box[0]), int(box[1])), (int(box[0]), int(box[3])), color, 20)
+            cv2.line(mask, (int(box[0]), int(box[1])), (int(box[2]), int(box[1])), color, 20)
             # cv2.line(debug_img, (int(box[6]), int(box[7])), (int(box[2]), int(box[3])), color, 2)
             # cv2.line(debug_img, (int(box[4]), int(box[5])), (int(box[6]), int(box[7])), color, 2)
         # print(im_blob[:2,:2])
         
         
         cv2.imwrite('/content/debug/sample.png',debug_img)
+        cv2.imwrite('/content/debug/mask.png',mask)
         # print('maximum',np.maximum(debug_img))
         # print('minimum',np.minimum(debug_img))
         # for bbox in gt_boxes:
