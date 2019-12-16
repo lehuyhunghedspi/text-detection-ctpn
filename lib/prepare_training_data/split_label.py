@@ -16,7 +16,7 @@ for file in files:
     if basename.lower().split('.')[-1] not in ['jpg', 'png']:
         continue
     stem, ext = os.path.splitext(basename)
-    gt_file = os.path.join(gt_path, 'gt_' + stem + '.txt')
+    gt_file = os.path.join(gt_path,  stem + '.txt')
     img_path = os.path.join(path, file)
     print(img_path)
     img = cv.imread(img_path)
