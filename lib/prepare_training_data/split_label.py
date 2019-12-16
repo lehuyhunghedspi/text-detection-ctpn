@@ -3,8 +3,8 @@ import numpy as np
 import math
 import cv2 as cv
 
-path = '/content/drive/My Drive/ctpn/0325updated.task1train(626p)'
-gt_path = '/content/drive/My Drive/ctpn/0325updated.task1train(626p)'
+path = '/content/drive/My Drive/GR2/ctpn/0325updated.task1train(626p)'
+gt_path = '/content/drive/My Drive/GR2/ctpn/0325updated.task1train(626p)'
 out_path = '/content/drive/My Drive/GR2/ctpn/re_image'
 if not os.path.exists(out_path):
     os.makedirs(out_path)
