@@ -40,6 +40,8 @@ class Network(object):
         raise NotImplementedError('Must be subclassed.')
 
     def load(self, data_path, session, ignore_missing=False):
+        
+        data_path='/content/text-detection-ctpn/'+data_path
         print('======',data_path)
         data_dict = np.load(data_path,encoding='latin1').item()
         for key in data_dict:
