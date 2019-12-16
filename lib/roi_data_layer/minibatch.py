@@ -2,6 +2,7 @@ import numpy as np
 import numpy.random as npr
 import cv2
 import os
+import re
 
 from ..fast_rcnn.config import cfg
 from ..utils.blob import prep_im_for_blob, im_list_to_blob
@@ -46,6 +47,9 @@ def get_minibatch(roidb, num_classes):
 
 
         #create split line mask:
+
+        raw_gt_file=os.path.join('/content/drive/My Drive/GR2/ctpn/0325updated.task1train(626p)',
+            re.sub(".jpg|.png",".txt",blobs['im_name']))
         print(im_blob.shape)
         mask=np.zeros(im_blob.shape[1:])
         print(gt_boxes.shape)
@@ -53,10 +57,12 @@ def get_minibatch(roidb, num_classes):
         np.clip(debug_img,0,255)
         color = (255, 0, 0)
         print(debug_img.shape)
-        for box in gt_boxes:
+        with open(raw_gt_file,"r") as f:
+            raw_boxs=[[int(number) for number in line[:-1].split(',')[:-1]] for line in f.readlines()]
+        for box in raw_boxs:
             print(box)
-            cv2.line(mask, (int(box[0]), int(box[1])), (int(box[0]), int(box[3])), color, 20)
-            cv2.line(mask, (int(box[0]), int(box[1])), (int(box[2]), int(box[1])), color, 20)
+            cv2.line(mask, (int(box[0]), int(box[1])), (int(box[2]), int(box[3])), color, 20)
+            # cv2.line(mask, (int(box[2]), int(box[3])), (int(box[2]), int(box[1])), color, 20)
             # cv2.line(debug_img, (int(box[6]), int(box[7])), (int(box[2]), int(box[3])), color, 2)
             # cv2.line(debug_img, (int(box[4]), int(box[5])), (int(box[6]), int(box[7])), color, 2)
         # print(im_blob[:2,:2])
