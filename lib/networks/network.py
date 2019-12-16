@@ -43,7 +43,14 @@ class Network(object):
         
         data_path='/content/text-detection-ctpn/'+data_path
         print('======',data_path)
+        import numpy as np
+        # save np.load
+        np_load_old = np.load
+
+        # modify the default parameters of np.load
+        np.load = lambda *a,**k: np_load_old(*a, allow_pickle=True, **k)
         data_dict = np.load(data_path,encoding='latin1').item()
+        np.load = np_load_old
         for key in data_dict:
             with tf.variable_scope(key, reuse=True):
                 for subkey in data_dict[key]:
