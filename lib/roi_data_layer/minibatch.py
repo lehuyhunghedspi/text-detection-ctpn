@@ -47,7 +47,8 @@ def get_minibatch(roidb, num_classes):
 
         #create split line mask:
         print(im_blob.shape)
-        # mask=
+        mask=np.zeros(im_blob.shape)
+        print(mask.shape)
 
     else: # not using RPN
         # Now, build the region of interest and label blobs
