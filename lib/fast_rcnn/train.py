@@ -138,6 +138,7 @@ class SolverWrapper(object):
 
         last_snapshot_iter = -1
         timer = Timer()
+        print("cfg.TRAIN.SNAPSHOT_ITERS",cfg.TRAIN.SNAPSHOT_ITERS)
         for iter in range(restore_iter, max_iters):
             timer.tic()
             # learning rate
