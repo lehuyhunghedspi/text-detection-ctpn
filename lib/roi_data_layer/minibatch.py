@@ -53,6 +53,7 @@ def get_minibatch(roidb, num_classes):
         np.clip(debug_img,0,255)
         color = (255, 0, 0)
         for box in gt_boxes:
+            print(box)
             cv2.line(debug_img, (int(box[0]), int(box[1])), (int(box[0]), int(box[3])), color, 20)
             cv2.line(debug_img, (int(box[0]), int(box[1])), (int(box[2]), int(box[1])), color, 20)
             # cv2.line(debug_img, (int(box[6]), int(box[7])), (int(box[2]), int(box[3])), color, 2)
