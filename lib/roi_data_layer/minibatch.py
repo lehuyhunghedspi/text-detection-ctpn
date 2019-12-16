@@ -49,13 +49,18 @@ def get_minibatch(roidb, num_classes):
         print(im_blob.shape)
         mask=np.zeros(im_blob.shape)
         print(gt_boxes.shape)
-        for a in gt_boxes:
-            print(a)
+        debug_img=im_blob.astype(int)[0]+128
+        np.clip(debug_img,0,255)
+        color = (255, 0, 0)
+        for box in gt_boxes:
+            cv2.line(debug_img, (int(box[0]), int(box[1])), (int(box[0]), int(box[3])), color, 2)
+            cv2.line(debug_img, (int(box[0]), int(box[1])), (int(box[2]), int(box[1])), color, 2)
+            # cv2.line(debug_img, (int(box[6]), int(box[7])), (int(box[2]), int(box[3])), color, 2)
+            # cv2.line(debug_img, (int(box[4]), int(box[5])), (int(box[6]), int(box[7])), color, 2)
         # print(im_blob[:2,:2])
         
-        debug_img=im_blob.astype(int)+128
-        np.clip(debug_img,0,255)
-        cv2.imwrite('/content/debug/sample.png',debug_img[0])
+        
+        cv2.imwrite('/content/debug/sample.png',debug_img)
         # print('maximum',np.maximum(debug_img))
         # print('minimum',np.minimum(debug_img))
         # for bbox in gt_boxes:
