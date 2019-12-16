@@ -22,7 +22,7 @@ def resize_im(im, scale, max_scale=None):
 
 def draw_boxes(img,image_name,boxes,scale):
     base_name = image_name.split('/')[-1]
-    with open('/content/drive/My Drive/GR2/ctpn/results/' + '{}.txt'.format(base_name.split('.')[0]), 'w') as f:
+    with open('/content/drive/My Drive/GR2/ctpn/finetune/results/' + '{}.txt'.format(base_name.split('.')[0]), 'w') as f:
         for box in boxes:
             if np.linalg.norm(box[0] - box[1]) < 5 or np.linalg.norm(box[3] - box[0]) < 5:
                 continue
@@ -47,7 +47,7 @@ def draw_boxes(img,image_name,boxes,scale):
             f.write(line)
 
     img=cv2.resize(img, None, None, fx=1.0/scale, fy=1.0/scale, interpolation=cv2.INTER_LINEAR)
-    cv2.imwrite(os.path.join("/content/drive/My Drive/GR2/ctpn/results_visualize/", base_name), img)
+    cv2.imwrite(os.path.join("/content/drive/My Drive/GR2/ctpn/finetune/results_visualize/", base_name), img)
 
 def ctpn(sess, net, image_name):
     timer = Timer()
