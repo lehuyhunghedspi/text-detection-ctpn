@@ -51,6 +51,7 @@ def get_minibatch(roidb, num_classes):
         print(gt_boxes.shape)
         print(gt_boxes[:,4])
         # print(im_blob[:2,:2])
+        print(im_blob.astype(int))
         cv2.imwrite('/content/debug/'+blobs['im_name'],im_blob.astype(int))
         # for bbox in gt_boxes:
 
