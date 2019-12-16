@@ -33,7 +33,7 @@ def get_minibatch(roidb, num_classes):
         gt_boxes[:, 0:4] = roidb[0]['boxes'][gt_inds, :] * im_scales[0]
         gt_boxes[:, 4] = roidb[0]['gt_classes'][gt_inds]
         blobs['gt_boxes'] = gt_boxes
-        print(gt_boxes)
+        # print(gt_boxes)
         blobs['gt_ishard'] = roidb[0]['gt_ishard'][gt_inds]  \
             if 'gt_ishard' in roidb[0] else np.zeros(gt_inds.size, dtype=int)
         # blobs['gt_ishard'] = roidb[0]['gt_ishard'][gt_inds]
@@ -43,6 +43,11 @@ def get_minibatch(roidb, num_classes):
             [[im_blob.shape[1], im_blob.shape[2], im_scales[0]]],
             dtype=np.float32)
         blobs['im_name'] = os.path.basename(roidb[0]['image'])
+
+
+        #create split line mask:
+        print(im_blob.shape)
+        # mask=
 
     else: # not using RPN
         # Now, build the region of interest and label blobs
