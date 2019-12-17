@@ -61,7 +61,7 @@ def get_minibatch(roidb, num_classes):
         scale_y=raw_image.shape[1]/debug_img.shape[1]
         mask=np.zeros(im_blob.shape[1:])
         
-        color = (255, 255, 0)
+        color = (254, 254, 0)
         with open(raw_gt_file,"r") as f:
             raw_boxs=[[int(number) for number in line[:-1].split(',')[:8]] for line in f.readlines()]
         
@@ -73,8 +73,8 @@ def get_minibatch(roidb, num_classes):
             # cv2.line(debug_img,(0,0),(20,20),(0,255,255),20)
             # cv2.line(debug_img, (int(box[1]/scale_y),int(box[0]/scale_x)),
             #  ( int(box[1]/scale_y)+50,int(box[0]/scale_x)+50), color, 100)
-            cv2.line(mask, (int(box[1]/scale_y),int(box[0]/scale_x)),
-             ( int(box[1]/scale_y)+5,int(box[0]/scale_x)+10), color, 5)
+            cv2.line(raw_image, (int(box[1]),int(box[0])),
+             ( int(box[1])+5,int(box[0])+10), color, 5)
             
             # cv2.line(debug_img, (int(box[2]), int(box[3])), (int(box[4]), int(box[5])), color, 10)
 
@@ -85,7 +85,7 @@ def get_minibatch(roidb, num_classes):
         
         
         cv2.imwrite('/content/debug/sample.png',debug_img)
-        cv2.imwrite('/content/debug/mask.png',mask)
+        cv2.imwrite('/content/debug/raw_image.png',raw_image)
 
         
         exit(-1)
