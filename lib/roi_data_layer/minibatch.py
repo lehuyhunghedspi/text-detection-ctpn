@@ -69,11 +69,12 @@ def get_minibatch(roidb, num_classes):
             # print((int(box[1]/scale_y),int(box[0]/scale_x)),
             #  ( int(box[1]/scale_y)+10,int(box[0]/scale_x)+10))
             # print(debug_img.shape)
+            print((int(box[1]/scale_y),int(box[0]/scale_x)))
             # cv2.line(debug_img,(0,0),(20,20),(0,255,255),20)
             # cv2.line(debug_img, (int(box[1]/scale_y),int(box[0]/scale_x)),
             #  ( int(box[1]/scale_y)+50,int(box[0]/scale_x)+50), color, 100)
             cv2.line(mask, (int(box[1]/scale_y),int(box[0]/scale_x)),
-             ( int(box[1]/scale_y)+50,int(box[0]/scale_x)+50), color, 5)
+             ( int(box[1]/scale_y)+5,int(box[0]/scale_x)+10), color, 5)
             
             # cv2.line(debug_img, (int(box[2]), int(box[3])), (int(box[4]), int(box[5])), color, 10)
 
