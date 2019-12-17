@@ -50,6 +50,13 @@ def get_minibatch(roidb, num_classes):
 
         raw_gt_file=os.path.join('/content/drive/My Drive/GR2/ctpn/0325updated.task1train(626p)',
             re.sub(".jpg|.png",".txt",blobs['im_name']))
+
+        raw_image_file=re.sub(".txt",".jpg",raw_gt_file)
+
+        raw_image=cv2.imread(raw_image_file)
+
+        scale_x=raw_image.shape[0]/im_blob.shape[0]
+        scale_y=raw_image.shape[1]/im_blob.shape[1]
         print(im_blob.shape)
         mask=np.zeros(im_blob.shape[1:])
         print(gt_boxes.shape)
@@ -59,6 +66,7 @@ def get_minibatch(roidb, num_classes):
         print(debug_img.shape)
         with open(raw_gt_file,"r") as f:
             raw_boxs=[[int(number) for number in line[:-1].split(',')[:8]] for line in f.readlines()]
+        
         for box in raw_boxs:
             print(box)
             cv2.line(debug_img, (int(box[0]), int(box[1])), (int(box[0])+10, int(box[1])+10), color, 10)
@@ -173,6 +181,8 @@ def _get_image_blob(roidb, scale_inds):
     im_scales = []
     for i in range(num_images):
         im = cv2.imread(roidb[i]['image'])
+
+        print('image raw',im.shape)
         if roidb[i]['flipped']:
             im = im[:, ::-1, :]
         target_size = cfg.TRAIN.SCALES[scale_inds[i]]
