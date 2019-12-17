@@ -66,14 +66,14 @@ def get_minibatch(roidb, num_classes):
             raw_boxs=[[int(number) for number in line[:-1].split(',')[:8]] for line in f.readlines()]
         
         for box in raw_boxs:
-            print((int(box[1]/scale_y),int(box[0]/scale_x)),
-             ( int(box[1]/scale_y)+10,int(box[0]/scale_x)+10))
-            print(debug_img.shape)
-            cv2.line(debug_img,(0,0),(20,20),(0,255,255),20)
-            cv2.line(debug_img, (int(box[1]/scale_y),int(box[0]/scale_x)),
-             ( int(box[1]/scale_y)+50,int(box[0]/scale_x)+50), color, 100)
+            # print((int(box[1]/scale_y),int(box[0]/scale_x)),
+            #  ( int(box[1]/scale_y)+10,int(box[0]/scale_x)+10))
+            # print(debug_img.shape)
+            # cv2.line(debug_img,(0,0),(20,20),(0,255,255),20)
+            # cv2.line(debug_img, (int(box[1]/scale_y),int(box[0]/scale_x)),
+            #  ( int(box[1]/scale_y)+50,int(box[0]/scale_x)+50), color, 100)
             cv2.line(mask, (int(box[1]/scale_y),int(box[0]/scale_x)),
-             ( int(box[1]/scale_y)+50,int(box[0]/scale_x)+50), color, 100)
+             ( int(box[1]/scale_y)+50,int(box[0]/scale_x)+50), color, 5)
             
             # cv2.line(debug_img, (int(box[2]), int(box[3])), (int(box[4]), int(box[5])), color, 10)
 
