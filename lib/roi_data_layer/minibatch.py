@@ -60,7 +60,7 @@ def get_minibatch(roidb, num_classes):
 
         scale_x=raw_image.shape[0]/debug_img.shape[0]
         scale_y=raw_image.shape[1]/debug_img.shape[1]
-        mask=(np.zeros(im_blob.shape[1:])+np.array([0,0,1],dtype=np.uint8)).astype(np.uint8)
+        mask=(np.zeros(im_blob.shape[1:])+np.array([[[0,0,1]]],dtype=np.uint8)).astype(np.uint8)
         
         color = (254, 254, 0)
         with open(raw_gt_file,"r") as f:
