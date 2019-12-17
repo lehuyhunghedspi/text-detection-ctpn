@@ -47,7 +47,7 @@ def get_minibatch(roidb, num_classes):
 
 
         #create split line mask:
-        debug_img=im_blob.astype(int)[0]+128
+        debug_img=(im_blob.astype(int)[0]+128).astype(np.uint)
         debug_img=copy.deepcopy(debug_img)
         np.clip(debug_img,0,255)
         raw_gt_file=os.path.join('/content/drive/My Drive/GR2/ctpn/0325updated.task1train(626p)',
@@ -72,6 +72,9 @@ def get_minibatch(roidb, num_classes):
             cv2.line(debug_img,(0,0),(20,20),(0,255,255),20)
             cv2.line(debug_img, (int(box[1]/scale_y),int(box[0]/scale_x)),
              ( int(box[1]/scale_y)+50,int(box[0]/scale_x)+50), color, 100)
+            cv2.line(mask, (int(box[1]/scale_y),int(box[0]/scale_x)),
+             ( int(box[1]/scale_y)+50,int(box[0]/scale_x)+50), color, 100)
+            
             # cv2.line(debug_img, (int(box[2]), int(box[3])), (int(box[4]), int(box[5])), color, 10)
 
             # cv2.line(mask, (int(box[2]), int(box[3])), (int(box[2]), int(box[1])), color, 20)
