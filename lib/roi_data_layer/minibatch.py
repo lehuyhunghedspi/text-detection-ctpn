@@ -87,6 +87,7 @@ def get_minibatch(roidb, num_classes):
         
         cv2.imwrite('/content/debug/sample.png',debug_img)
         cv2.imwrite('/content/debug/raw_image.png',raw_image)
+        cv2.imwrite('/content/debug/mask.png',mask)
 
         
         exit(-1)
