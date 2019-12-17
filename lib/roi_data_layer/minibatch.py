@@ -55,7 +55,7 @@ def get_minibatch(roidb, num_classes):
         print(gt_boxes.shape)
         debug_img=im_blob.astype(int)[0]+128
         np.clip(debug_img,0,255)
-        color = (255, 0, 0)
+        color = (0, 255, 0)
         print(debug_img.shape)
         with open(raw_gt_file,"r") as f:
             raw_boxs=[[int(number) for number in line[:-1].split(',')[:8]] for line in f.readlines()]
