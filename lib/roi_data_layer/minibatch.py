@@ -189,9 +189,10 @@ def _get_image_blob(roidb, scale_inds):
         im, im_scale = prep_im_for_blob(im, cfg.PIXEL_MEANS, target_size,
                                         cfg.TRAIN.MAX_SIZE)
         print('preprocess image raw',im.shape)
+        cv2.imwrite()
         im_scales.append(im_scale)
         processed_ims.append(im)
-
+        cv2.imwrite('/content/debug/im.png',im)
     # Create a blob to hold the input images
     blob = im_list_to_blob(processed_ims)
 
