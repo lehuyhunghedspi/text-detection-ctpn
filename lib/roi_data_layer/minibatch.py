@@ -188,7 +188,7 @@ def _get_image_blob(roidb, scale_inds):
         cv2.imwrite('/content/debug/im.png',im)
     # Create a blob to hold the input images
     blob = im_list_to_blob(processed_ims)
-    cv2.imwrite('/content/debug/blob.png',blob[0])
+    cv2.imwrite('/content/debug/blob.png',(blob[0]+cfg.PIXEL_MEANS).astype(int))
     return blob, im_scales
 
 def _project_im_rois(im_rois, im_scale_factor):
