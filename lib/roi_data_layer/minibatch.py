@@ -188,6 +188,7 @@ def _get_image_blob(roidb, scale_inds):
         target_size = cfg.TRAIN.SCALES[scale_inds[i]]
         im, im_scale = prep_im_for_blob(im, cfg.PIXEL_MEANS, target_size,
                                         cfg.TRAIN.MAX_SIZE)
+        print('preprocess image raw',im.shape)
         im_scales.append(im_scale)
         processed_ims.append(im)
 
