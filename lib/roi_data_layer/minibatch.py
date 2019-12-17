@@ -53,6 +53,7 @@ def get_minibatch(roidb, num_classes):
         raw_gt_file=os.path.join('/content/drive/My Drive/GR2/ctpn/0325updated.task1train(626p)',
             re.sub(".jpg|.png",".txt",blobs['im_name']))
 
+        print(blobs['im_name'])
         raw_image_file=re.sub(".txt",".jpg",raw_gt_file)
 
         raw_image=cv2.imread(raw_image_file)
