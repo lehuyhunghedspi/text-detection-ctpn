@@ -55,20 +55,16 @@ def get_minibatch(roidb, num_classes):
 
         raw_image=cv2.imread(raw_image_file)
 
-        scale_x=raw_image.shape[0]/im_blob.shape[0]
-        scale_y=raw_image.shape[1]/im_blob.shape[1]
-        print(im_blob.shape)
+        scale_x=raw_image.shape[0]/debug_img.shape[0]
+        scale_y=raw_image.shape[1]/debug_img.shape[1]
         mask=np.zeros(im_blob.shape[1:])
-        print(gt_boxes.shape)
         debug_img=im_blob.astype(int)[0]+128
         np.clip(debug_img,0,255)
         color = (0, 255, 0)
-        print(debug_img.shape)
         with open(raw_gt_file,"r") as f:
             raw_boxs=[[int(number) for number in line[:-1].split(',')[:8]] for line in f.readlines()]
         
         for box in raw_boxs:
-            print(box)
             cv2.line(debug_img, (int(box[0]), int(box[1])), (int(box[0])+10, int(box[1])+10), color, 10)
             # cv2.line(debug_img, (int(box[2]), int(box[3])), (int(box[4]), int(box[5])), color, 10)
 
@@ -80,11 +76,8 @@ def get_minibatch(roidb, num_classes):
         
         cv2.imwrite('/content/debug/sample.png',debug_img)
         cv2.imwrite('/content/debug/mask.png',mask)
-        # print('maximum',np.maximum(debug_img))
-        # print('minimum',np.minimum(debug_img))
-        # for bbox in gt_boxes:
 
-        print(mask.shape)
+        
         exit(-1)
 
     else: # not using RPN
@@ -183,8 +176,8 @@ def _get_image_blob(roidb, scale_inds):
         im = cv2.imread(roidb[i]['image'])
 
         print('image raw',im.shape)
-        if roidb[i]['flipped']:
-            im = im[:, ::-1, :]
+        # if roidb[i]['flipped']:
+        #     im = im[:, ::-1, :]
         target_size = cfg.TRAIN.SCALES[scale_inds[i]]
         im, im_scale = prep_im_for_blob(im, cfg.PIXEL_MEANS, target_size,
                                         cfg.TRAIN.MAX_SIZE)
@@ -195,7 +188,7 @@ def _get_image_blob(roidb, scale_inds):
         cv2.imwrite('/content/debug/im.png',im)
     # Create a blob to hold the input images
     blob = im_list_to_blob(processed_ims)
-
+    cv2.imwrite('/content/debug/blob.png',blob[0])
     return blob, im_scales
 
 def _project_im_rois(im_rois, im_scale_factor):
