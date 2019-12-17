@@ -47,7 +47,8 @@ def get_minibatch(roidb, num_classes):
 
 
         #create split line mask:
-
+        debug_img=im_blob.astype(int)[0]+128
+        np.clip(debug_img,0,255)
         raw_gt_file=os.path.join('/content/drive/My Drive/GR2/ctpn/0325updated.task1train(626p)',
             re.sub(".jpg|.png",".txt",blobs['im_name']))
 
@@ -58,8 +59,7 @@ def get_minibatch(roidb, num_classes):
         scale_x=raw_image.shape[0]/debug_img.shape[0]
         scale_y=raw_image.shape[1]/debug_img.shape[1]
         mask=np.zeros(im_blob.shape[1:])
-        debug_img=im_blob.astype(int)[0]+128
-        np.clip(debug_img,0,255)
+        
         color = (0, 255, 0)
         with open(raw_gt_file,"r") as f:
             raw_boxs=[[int(number) for number in line[:-1].split(',')[:8]] for line in f.readlines()]
