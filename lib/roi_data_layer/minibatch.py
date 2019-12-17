@@ -3,7 +3,7 @@ import numpy.random as npr
 import cv2
 import os
 import re
-
+import copy
 from ..fast_rcnn.config import cfg
 from ..utils.blob import prep_im_for_blob, im_list_to_blob
 
@@ -48,6 +48,7 @@ def get_minibatch(roidb, num_classes):
 
         #create split line mask:
         debug_img=im_blob.astype(int)[0]+128
+        debug_img=copy.deepcopy(debug_img)
         np.clip(debug_img,0,255)
         raw_gt_file=os.path.join('/content/drive/My Drive/GR2/ctpn/0325updated.task1train(626p)',
             re.sub(".jpg|.png",".txt",blobs['im_name']))
