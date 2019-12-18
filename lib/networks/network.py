@@ -229,7 +229,10 @@ class Network(object):
         x1_shape = tf.shape(x1)
         x2_shape = tf.shape(x2)
 
-        paddings=tf.stack([[0,0], [x1_shape[1]-x2_shape[1],0],[x1_shape[2]-x2_shape[2],0],[0,0]])
+        paddings=tf.stack([[0,0], 
+                            [x1_shape[1]-x2_shape[1],0],
+                            [x1_shape[2]-x2_shape[2],0],
+                            [0,0]])
         x2=tf.pad(x2, paddings, "REFLECT") 
         return tf.concat([x1, x2], 3)
     @layer

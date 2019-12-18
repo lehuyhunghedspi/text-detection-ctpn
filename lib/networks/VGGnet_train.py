@@ -78,7 +78,7 @@ class VGGnet_train(Network):
         (self.feed('conv5_3')
              .transpose_conv(3,3,512,2,2,name='transpose_conv_5_3'))
 
-        (self.feed('pool4','transpose_conv_5_3')
-             .padding_and_concat(name='concat_pool4_transpose_conv_5_3'))
+        # (self.feed('pool4','transpose_conv_5_3')
+        #      .padding_and_concat(name='concat_pool4_transpose_conv_5_3'))
 
         # exit(-1)
