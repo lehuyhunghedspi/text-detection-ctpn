@@ -37,6 +37,8 @@ class VGGnet_train(Network):
              .conv(3, 3, 64, 1, 1, name='conv1_1')\
              .conv(3, 3, 64, 1, 1, name='conv1_2')\
              .max_pool(2, 2, 2, 2, padding='VALID', name='pool1')
+        print(type(self.feature['layer1']),"self.feature['layer1']")
+        exit(1)
         self.feature['layer2']=self.feature['layer1'].conv(3, 3, 128, 1, 1, name='conv2_1')\
              .conv(3, 3, 128, 1, 1, name='conv2_2')\
              .max_pool(2, 2, 2, 2, padding='VALID', name='pool2')
