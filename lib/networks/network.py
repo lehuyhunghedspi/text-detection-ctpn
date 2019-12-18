@@ -261,7 +261,7 @@ class Network(object):
         y_right=tf.cast(tf.round((x1_shape[2]-x2_shape[2])/2), tf.int32)  
         y_left=x1_shape[2]-x2_shape[2]-y_right
 
-        offsets = [0, x_bottom+1, y_right+1, 0]
+        offsets = [0, x_bottom, y_right, 0]
         size = [-1, x2_shape[1], x2_shape[2], -1]
         x1_crop = tf.slice(x1, offsets, size)
         return tf.concat([x1_crop, x2], 3)
