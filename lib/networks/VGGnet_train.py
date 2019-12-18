@@ -75,14 +75,13 @@ class VGGnet_train(Network):
 
 
         # define mask unet
+        
+
+
         (self.feed('conv5_3')
-             .max_pool(2, 2, 2, 2, padding='VALID', name='pool5'))
-
-
-        (self.feed('pool5')
              .transpose_conv(3,3,512,512,2,2,name='transpose_pool5'))
 
-        (self.feed('pool4','transpose_pool5')
+        (self.feed('conv4_3','transpose_pool5')
              .crop_and_concat(name='concat_pool4'))
 
         (self.feed('concat_pool4')
@@ -93,7 +92,7 @@ class VGGnet_train(Network):
         (self.feed('concat_pool4_c2')
              .transpose_conv(3,3,512,256,2,2,name='transpose_pool4'))
 
-        (self.feed('pool3','transpose_pool4')
+        (self.feed('conv3_3','transpose_pool4')
              .crop_and_concat(name='concat_pool3'))
 
 
@@ -104,7 +103,7 @@ class VGGnet_train(Network):
         (self.feed('concat_pool3_c2')#x,x,256
              .transpose_conv(3,3,256,128,2,2,name='transpose_pool3'))
 
-        (self.feed('pool2','transpose_pool3')
+        (self.feed('conv2_2','transpose_pool3')
              .crop_and_concat(name='concat_pool2'))
 
 
@@ -115,7 +114,7 @@ class VGGnet_train(Network):
         (self.feed('concat_pool2_c2')#x,x,128
              .transpose_conv(3,3,128,64,2,2,name='transpose_pool2'))
 
-        (self.feed('pool1','transpose_pool2')#x,x,128
+        (self.feed('conv1_2','transpose_pool2')#x,x,128
              .crop_and_concat(name='concat_pool1'))
 
         (self.feed('concat_pool1')#x,x,128
