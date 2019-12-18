@@ -201,7 +201,7 @@ class Network(object):
         # c_i = input.get_shape()[-1]
         x_shape = tf.shape(input)
         
-        output_shape = tf.stack([x_shape[0], x_shape[1]*2, x_shape[2]*2, 256])
+        output_shape = tf.stack([x_shape[0], x_shape[1]*2, x_shape[2]*2, c_o])
         # return tf.nn.conv2d_transpose(x, W, output_shape, strides=[1, stride, stride, 1], padding='VALID', name="conv2d_transpose")
 
         conv2d_transpose = lambda i, k: tf.nn.conv2d_transpose(i, k,output_shape,strides= [1, s_h, s_w, 1], padding=padding)
