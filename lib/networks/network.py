@@ -209,6 +209,7 @@ class Network(object):
 
             init_weights = tf.truncated_normal_initializer(0.0, stddev=0.01)
             init_biases = tf.constant_initializer(0.0)
+            print([k_h, k_w, c_i, c_o])
             kernel = self.make_var('weights', [k_h, k_w, c_i, c_o], init_weights, trainable, \
                                    regularizer=self.l2_regularizer(cfg.TRAIN.WEIGHT_DECAY))
             if biased:
