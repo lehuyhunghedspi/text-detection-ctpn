@@ -223,7 +223,7 @@ class Network(object):
                 return conv
 
     @layer
-    def padding_and_concat(self,input):
+    def padding_and_concat(self,input,name):
         x1=input[0]
         x2=input[1]
         x1_shape = tf.shape(x1)
