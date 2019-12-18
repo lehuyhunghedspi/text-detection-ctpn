@@ -250,6 +250,22 @@ class Network(object):
         x2=tf.pad(x2, paddings, "SYMMETRIC") 
         return tf.concat([x1, x2], 3)
     @layer
+    def crop_and_concat(self,input,name):
+        x1=input[0]
+        x2=input[1]
+        x1_shape = tf.shape(x1)
+        x2_shape = tf.shape(x2)
+
+        x_bottom=tf.cast(tf.round((x1_shape[1]-x2_shape[1])/2), tf.int32)  
+        x_top=x1_shape[1]-x2_shape[1]-x_bottom
+        y_right=tf.cast(tf.round((x1_shape[2]-x2_shape[2])/2), tf.int32)  
+        y_left=x1_shape[2]-x2_shape[2]-y_right
+
+        offsets = [0, x_bottom, y_right, 0]
+        size = [-1, x2_shape[1], x2_shape[2], -1]
+        x1_crop = tf.slice(x1, offsets, size)
+        return tf.concat([x1_crop, x2], 3)
+    @layer
     def relu(self, input, name):
         return tf.nn.relu(input, name=name)
 
