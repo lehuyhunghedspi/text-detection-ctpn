@@ -198,7 +198,7 @@ class Network(object):
     def transpose_conv(self,input,k_h,k_w,c_o,s_h, s_w, name, biased=True,relu=True, padding=DEFAULT_PADDING, trainable=True):
         self.validate_padding(padding)
         c_i = input.get_shape()[-1]
-        conv2d_transpose = lambda i, k: tf.nn.conv2d_transpose(i, k, [1, s_h, s_w, 1], padding=padding)
+        conv2d_transpose = lambda i, k: tf.nn.conv2d_transpose(i, k,strides= [1, s_h, s_w, 1], padding=padding)
         with tf.variable_scope(name) as scope:
 
             init_weights = tf.truncated_normal_initializer(0.0, stddev=0.01)
