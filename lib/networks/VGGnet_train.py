@@ -87,14 +87,14 @@ class VGGnet_train(Network):
 
         (self.feed('concat_pool4')
             .conv(3, 3, 512, 1, 1,c_i=1024, name='concat_pool4_c1'))
-        # (self.feed('concat_pool4_c1')
-        #     .conv(3, 3, 512, 1, 1, name='concat_pool4_c2'))
+        (self.feed('concat_pool4_c1')
+            .conv(3, 3, 512, 1, 1,c_i=512, name='concat_pool4_c2'))
 
-        # (self.feed('concat_pool4_c2')
-        #      .transpose_conv(3,3,512,512,2,2,name='concat_pool4_c2'))
+        (self.feed('concat_pool4_c2')
+             .transpose_conv(3,3,512,256,2,2,name='transpose_pool4'))
 
-        # (self.feed('pool3','concat_pool4_c2')
-        #      .padding_and_concat(name='concat_pool3'))
+        (self.feed('pool3','transpose_pool4')
+             .padding_and_concat(name='concat_pool3'))
 
 
 
