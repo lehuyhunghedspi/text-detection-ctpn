@@ -160,7 +160,8 @@ class SolverWrapper(object):
                 self.net.dontcare_areas: blobs['dontcare_areas']
             }
 
-            debug_output=[self.net.layers['pool1'],
+            debug_output=[self.net.data,
+                          self.net.layers['pool1'],
                           self.net.layers['pool2'],
                           self.net.layers['pool3'],
                           self.net.layers['pool4'],
