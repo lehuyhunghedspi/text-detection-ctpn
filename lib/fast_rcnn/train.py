@@ -166,7 +166,8 @@ class SolverWrapper(object):
                           self.net.layers['pool4'],
                           self.net.layers['pool5'],
                           self.net.layers['transpose_pool5'],
-                          self.net.layers['concat_pool4_transpose_pool5']
+                          self.net.layers['concat_pool4'],
+                          self.net.layers['concat_pool3'],
                           ]
             res_fetches=[]
             fetch_list = [total_loss,model_loss, rpn_cross_entropy, rpn_loss_box,
