@@ -195,9 +195,9 @@ class Network(object):
                 return conv
 
     @layer
-    def transpose_conv(self,input,k_h,k_w,c_o,s_h, s_w, name, biased=True,relu=True, padding=DEFAULT_PADDING, trainable=True):
+    def transpose_conv(self,input,k_h,k_w,c_i,c_o,s_h, s_w, name, biased=True,relu=True, padding=DEFAULT_PADDING, trainable=True):
         self.validate_padding(padding)
-        c_i = input.get_shape()[-1]
+        # c_i = input.get_shape()[-1]
         x_shape = tf.shape(input)
         
         output_shape = tf.stack([x_shape[0], x_shape[1]*2, x_shape[2]*2, 256])
@@ -209,7 +209,7 @@ class Network(object):
 
             init_weights = tf.truncated_normal_initializer(0.0, stddev=0.01)
             init_biases = tf.constant_initializer(0.0)
-            kernel = self.make_var('weights', [k_h, k_w, x_shape[3], c_o], init_weights, trainable, \
+            kernel = self.make_var('weights', [k_h, k_w, c_i, c_o], init_weights, trainable, \
                                    regularizer=self.l2_regularizer(cfg.TRAIN.WEIGHT_DECAY))
             if biased:
                 biases = self.make_var('biases', [c_o], init_biases, trainable)
