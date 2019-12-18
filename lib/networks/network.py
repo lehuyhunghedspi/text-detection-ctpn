@@ -199,11 +199,12 @@ class Network(object):
         self.validate_padding(padding)
         c_i = input.get_shape()[-1]
         x_shape = tf.shape(input)
-        print(x_shape[0], x_shape[1]*2, x_shape[2]*2, 256)
+        print("======== bug ====")
         output_shape = tf.stack([x_shape[0], x_shape[1]*2, x_shape[2]*2, 256])
         # return tf.nn.conv2d_transpose(x, W, output_shape, strides=[1, stride, stride, 1], padding='VALID', name="conv2d_transpose")
 
         conv2d_transpose = lambda i, k: tf.nn.conv2d_transpose(i, k,output_shape,strides= [1, s_h, s_w, 1], padding=padding)
+        print("======== bug ====")
         with tf.variable_scope(name) as scope:
 
             init_weights = tf.truncated_normal_initializer(0.0, stddev=0.01)
