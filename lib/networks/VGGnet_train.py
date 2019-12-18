@@ -118,6 +118,15 @@ class VGGnet_train(Network):
         (self.feed('pool1','transpose_pool2')#x,x,128
              .crop_and_concat(name='concat_pool1'))
 
+        (self.feed('concat_pool1')#x,x,128
+             .conv(3, 3, 64, 1, 1,c_i=128, name='concat_pool1_c1'))
+
+        (self.feed('concat_pool1_c1')#x,x,64
+             .conv(3, 3, 64, 1, 1,c_i=64, name='concat_pool1_c2'))
+
+        (self.feed('concat_pool1_c2')#x,x,64
+             .conv(3, 3, 2, 1, 1,c_i=64, name='logit',relu=False))
+
 
 
         # exit(-1)
