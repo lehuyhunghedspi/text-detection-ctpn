@@ -37,21 +37,21 @@ class VGGnet_train(Network):
              .conv(3, 3, 64, 1, 1, name='conv1_1')\
              .conv(3, 3, 64, 1, 1, name='conv1_2')\
              .max_pool(2, 2, 2, 2, padding='VALID', name='pool1')
-        self.feature['layer2']=self.feature['layer1'].conv(3, 3, 128, 1, 1, name='conv2_1')
-             .conv(3, 3, 128, 1, 1, name='conv2_2')
+        self.feature['layer2']=self.feature['layer1'].conv(3, 3, 128, 1, 1, name='conv2_1')\
+             .conv(3, 3, 128, 1, 1, name='conv2_2')\
              .max_pool(2, 2, 2, 2, padding='VALID', name='pool2')
-        self.feature['layer3']=self.feature['layer2']
-             .conv(3, 3, 256, 1, 1, name='conv3_1')
-             .conv(3, 3, 256, 1, 1, name='conv3_2')
-             .conv(3, 3, 256, 1, 1, name='conv3_3')
+        self.feature['layer3']=self.feature['layer2']\
+             .conv(3, 3, 256, 1, 1, name='conv3_1')\
+             .conv(3, 3, 256, 1, 1, name='conv3_2')\
+             .conv(3, 3, 256, 1, 1, name='conv3_3')\
              .max_pool(2, 2, 2, 2, padding='VALID', name='pool3')
-        self.feature['layer4']=self.feature['layer3'].conv(3, 3, 512, 1, 1, name='conv4_1')
-             .conv(3, 3, 512, 1, 1, name='conv4_2')
-             .conv(3, 3, 512, 1, 1, name='conv4_3')
+        self.feature['layer4']=self.feature['layer3'].conv(3, 3, 512, 1, 1, name='conv4_1')\
+             .conv(3, 3, 512, 1, 1, name='conv4_2')\
+             .conv(3, 3, 512, 1, 1, name='conv4_3')\
              .max_pool(2, 2, 2, 2, padding='VALID', name='pool4')
-        self.feature['layer5']=self.feature['layer5']
-        .conv(3, 3, 512, 1, 1, name='conv5_1')
-        .conv(3, 3, 512, 1, 1, name='conv5_2')
+        self.feature['layer5']=self.feature['layer5']\
+        .conv(3, 3, 512, 1, 1, name='conv5_1')\
+        .conv(3, 3, 512, 1, 1, name='conv5_2')\
         .conv(3, 3, 512, 1, 1, name='conv5_3')
              
              
