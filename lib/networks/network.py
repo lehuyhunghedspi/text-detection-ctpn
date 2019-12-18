@@ -199,6 +199,7 @@ class Network(object):
         self.validate_padding(padding)
         c_i = input.get_shape()[-1]
         x_shape = tf.shape(input)
+        print(x_shape[0], x_shape[1]*2, x_shape[2]*2, 256)
         output_shape = tf.stack([x_shape[0], x_shape[1]*2, x_shape[2]*2, 256])
         # return tf.nn.conv2d_transpose(x, W, output_shape, strides=[1, stride, stride, 1], padding='VALID', name="conv2d_transpose")
 
