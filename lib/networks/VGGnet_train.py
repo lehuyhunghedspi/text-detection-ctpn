@@ -109,7 +109,7 @@ class VGGnet_train(Network):
              .crop_and_concat(name='concat_pool2'))
 
 
-         (self.feed('concat_pool2')
+        (self.feed('concat_pool2')
             .conv(3, 3, 512, 1, 1,c_i=1024, name='concat_pool2_c1'))
         (self.feed('concat_pool2_c1')
             .conv(3, 3, 512, 1, 1,c_i=512, name='concat_pool2_c2'))
