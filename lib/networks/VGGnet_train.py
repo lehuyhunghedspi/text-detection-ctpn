@@ -75,7 +75,7 @@ class VGGnet_train(Network):
 
 
         # define mask unet
-        # (self.feed('conv5_3')
-        #      .transpose_conv(3,3,512,1,1,name='transpose_conv_5_3'))
+        (self.feed('conv5_3')
+             .transpose_conv(3,3,256,1,1,name='transpose_conv_5_3'))
 
         # exit(-1)
