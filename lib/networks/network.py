@@ -236,10 +236,10 @@ class Network(object):
         x1_shape = tf.shape(x1)
         x2_shape = tf.shape(x2)
 
-        x_bottom=tf.math.round((x1_shape[1]-x2_shape[1])/2)
+        x_bottom=tf.round((x1_shape[1]-x2_shape[1])/2)
         x_top=x1_shape[1]-x2_shape[1]-x_bottom
 
-        y_right=tf.math.round((x1_shape[2]-x2_shape[2])/2)
+        y_right=tf.round((x1_shape[2]-x2_shape[2])/2)
         y_left=x1_shape[2]-x2_shape[2]-y_right
 
         paddings=tf.stack([[0,0], 
