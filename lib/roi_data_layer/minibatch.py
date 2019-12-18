@@ -25,7 +25,6 @@ def get_minibatch(roidb, num_classes):
     blobs = {'data': im_blob}
 
     if cfg.TRAIN.HAS_RPN:
-        print("=========  using RPN ======")
         assert len(im_scales) == 1, "Single batch only"
         assert len(roidb) == 1, "Single batch only"
         # gt boxes: (x1, y1, x2, y2, cls)
@@ -67,33 +66,11 @@ def get_minibatch(roidb, num_classes):
             raw_boxs=[[int(number) for number in line[:-1].split(',')[:8]] for line in f.readlines()]
         
         for box in raw_boxs:
-            # print((int(box[1]/scale_y),int(box[0]/scale_x)),
-            #  ( int(box[1]/scale_y)+10,int(box[0]/scale_x)+10))
-            # print(debug_img.shape)
-            print((int(box[1]/scale_y),int(box[0]/scale_x)))
-            # cv2.line(debug_img,(0,0),(20,20),(0,255,255),20)
-            # cv2.line(debug_img, (int(box[1]/scale_y),int(box[0]/scale_x)),
-            #  ( int(box[1]/scale_y)+50,int(box[0]/scale_x)+50), color, 100)
             cv2.line(mask, (int(box[0]/scale_x),int(box[1]/scale_y)),
-             (int(box[6]/scale_x),int(box[7]/scale_y)), (255,0,0), 5)
-
+             (int(box[6]/scale_x),int(box[7]/scale_y)), (1,0,0), 5)
             cv2.line(mask, (int(box[2]/scale_x),int(box[3]/scale_y)),
-             (int(box[4]/scale_x),int(box[5]/scale_y)), (255,0,0), 5)
-            
-            # cv2.line(debug_img, (int(box[2]), int(box[3])), (int(box[4]), int(box[5])), color, 10)
-
-            # cv2.line(mask, (int(box[2]), int(box[3])), (int(box[2]), int(box[1])), color, 20)
-            # cv2.line(debug_img, (int(box[6]), int(box[7])), (int(box[2]), int(box[3])), color, 2)
-            # cv2.line(debug_img, (int(box[4]), int(box[5])), (int(box[6]), int(box[7])), color, 2)
-        # print(im_blob[:2,:2])
-        
-        
-        cv2.imwrite('/content/debug/sample.png',debug_img)
-        cv2.imwrite('/content/debug/raw_image.png',raw_image)
-        cv2.imwrite('/content/debug/mask.png',mask)
-
-        
-        exit(-1)
+             (int(box[4]/scale_x),int(box[5]/scale_y)), (0,1,0), 5)
+        blobs['head_tail_mask']=mask
 
     else: # not using RPN
         # Now, build the region of interest and label blobs
@@ -189,8 +166,6 @@ def _get_image_blob(roidb, scale_inds):
     im_scales = []
     for i in range(num_images):
         im = cv2.imread(roidb[i]['image'])
-
-        print('image raw',im.shape)
         # if roidb[i]['flipped']:
         #     im = im[:, ::-1, :]
         target_size = cfg.TRAIN.SCALES[scale_inds[i]]
@@ -200,10 +175,9 @@ def _get_image_blob(roidb, scale_inds):
         # cv2.imwrite()
         im_scales.append(im_scale)
         processed_ims.append(im)
-        cv2.imwrite('/content/debug/im.png',im)
+        
     # Create a blob to hold the input images
     blob = im_list_to_blob(processed_ims)
-    cv2.imwrite('/content/debug/blob.png',(blob[0]+cfg.PIXEL_MEANS).astype(int))
     return blob, im_scales
 
 def _project_im_rois(im_rois, im_scale_factor):
