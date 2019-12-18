@@ -239,7 +239,7 @@ class Network(object):
         x_bottom=tf.cast(tf.round((x1_shape[1]-x2_shape[1])/2), tf.int32)  
         x_top=x1_shape[1]-x2_shape[1]-x_bottom
 
-        y_right=f.cast(tf.round((x1_shape[2]-x2_shape[2])/2), tf.int32)  
+        y_right=tf.cast(tf.round((x1_shape[2]-x2_shape[2])/2), tf.int32)  
         y_left=x1_shape[2]-x2_shape[2]-y_right
 
         paddings=tf.stack([[0,0], 
