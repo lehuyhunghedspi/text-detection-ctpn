@@ -33,10 +33,10 @@ class VGGnet_train(Network):
         anchor_scales = cfg.ANCHOR_SCALES
         _feat_stride = [16, ]
         self.feature={}
-        (self.feature['layer1']=self.feed('data')\
+        self.feature['layer1']=self.feed('data')\
              .conv(3, 3, 64, 1, 1, name='conv1_1')\
              .conv(3, 3, 64, 1, 1, name='conv1_2')\
-             .max_pool(2, 2, 2, 2, padding='VALID', name='pool1'))
+             .max_pool(2, 2, 2, 2, padding='VALID', name='pool1')
         self.feature['layer2']=self.feature['layer1'].conv(3, 3, 128, 1, 1, name='conv2_1')
              .conv(3, 3, 128, 1, 1, name='conv2_2')
              .max_pool(2, 2, 2, 2, padding='VALID', name='pool2')
