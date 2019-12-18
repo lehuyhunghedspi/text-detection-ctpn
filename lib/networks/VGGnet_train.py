@@ -72,4 +72,10 @@ class VGGnet_train(Network):
              .spatial_softmax(name='rpn_cls_prob'))
 
         print(self.layers.keys())
+
+
+        # define mask unet
+        (self.transpose_conv('conv5_3')
+             .conv(3,3,512,1,1,name='transpose_conv_5_3'))
+
         # exit(-1)
