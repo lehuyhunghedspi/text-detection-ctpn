@@ -77,10 +77,16 @@ class VGGnet_train(Network):
         # define mask unet
         (self.feed('conv5_3')
              .max_pool(2, 2, 2, 2, padding='VALID', name='pool5'))
+
+
         (self.feed('pool5')
              .transpose_conv(3,3,512,256,2,2,name='transpose_pool5'))
 
         (self.feed('pool4','transpose_pool5')
-             .padding_and_concat(name='concat_pool4_transpose_pool5'))
+             .padding_and_concat(name='concat_pool4'))
+
+        (self.feed('concat_pool4')
+            .conv(3, 3, 64, 1, 1, name='conv1_1'))
+
 
         # exit(-1)
