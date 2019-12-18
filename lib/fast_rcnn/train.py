@@ -160,18 +160,20 @@ class SolverWrapper(object):
                 self.net.dontcare_areas: blobs['dontcare_areas']
             }
 
-            debug_output=[self.net.feature['layer1'],
-                          self.net.feature['layer2'],
-                          self.net.feature['layer3'],
-                          self.net.feature['layer4'],
-                          self.net.feature['layer5']]
+            debug_output=[self.net.layers['pool1'],
+                          self.net.layers['pool2'],
+                          self.net.layers['pool3'],
+                          self.net.layers['pool4'],
+                          self.net.layers['conv5_3']]
             res_fetches=[]
             fetch_list = [total_loss,model_loss, rpn_cross_entropy, rpn_loss_box,
                           summary_op,
                           train_op] + res_fetches
 
             debug_output_resuslt=sess.run(fetches=debug_output, feed_dict=feed_dict)
-            print(debug_output[0].shape)
+            
+            for a in debug_output_resuslt:
+                print(a.shape)
 
             total_loss_val,model_loss_val, rpn_loss_cls_val, rpn_loss_box_val, \
                 summary_str, _ = sess.run(fetches=fetch_list, feed_dict=feed_dict)
