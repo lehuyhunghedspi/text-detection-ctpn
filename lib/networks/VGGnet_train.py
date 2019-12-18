@@ -72,4 +72,4 @@ class VGGnet_train(Network):
              .spatial_softmax(name='rpn_cls_prob'))
 
         print(self.layers.keys())
-        exit(-1)
+        # exit(-1)
