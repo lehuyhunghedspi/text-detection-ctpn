@@ -20,7 +20,7 @@ class VGGnet_train(Network):
                             'gt_boxes':self.gt_boxes,\
                             'gt_ishard': self.gt_ishard, 
                             'dontcare_areas': self.dontcare_areas,
-                            'gt_head_tail_mask':self.gt_head_tail_mask})
+                            'gt_head_tail_mask':self.})
         self.trainable = trainable
 
         self.setup()
@@ -32,31 +32,25 @@ class VGGnet_train(Network):
         # anchor_scales = [8, 16, 32]
         anchor_scales = cfg.ANCHOR_SCALES
         _feat_stride = [16, ]
-        self.feature={}
-        self.feature['layer1']=self.feed('data').conv(3, 3, 64, 1, 1, name='conv1_1')\
-             .conv(3, 3, 64, 1, 1, name='conv1_2')\
+
+        (self.feed('data')
+             .conv(3, 3, 64, 1, 1, name='conv1_1')
+             .conv(3, 3, 64, 1, 1, name='conv1_2')
              .max_pool(2, 2, 2, 2, padding='VALID', name='pool1')
-        print(type(self.feature['layer1']),"self.feature['layer1']")
-        exit(1)
-        self.feature['layer2']=self.feature['layer1'].conv(3, 3, 128, 1, 1, name='conv2_1')\
-             .conv(3, 3, 128, 1, 1, name='conv2_2')\
+             .conv(3, 3, 128, 1, 1, name='conv2_1')
+             .conv(3, 3, 128, 1, 1, name='conv2_2')
              .max_pool(2, 2, 2, 2, padding='VALID', name='pool2')
-        self.feature['layer3']=self.feature['layer2']\
-             .conv(3, 3, 256, 1, 1, name='conv3_1')\
-             .conv(3, 3, 256, 1, 1, name='conv3_2')\
-             .conv(3, 3, 256, 1, 1, name='conv3_3')\
+             .conv(3, 3, 256, 1, 1, name='conv3_1')
+             .conv(3, 3, 256, 1, 1, name='conv3_2')
+             .conv(3, 3, 256, 1, 1, name='conv3_3')
              .max_pool(2, 2, 2, 2, padding='VALID', name='pool3')
-        self.feature['layer4']=self.feature['layer3'].conv(3, 3, 512, 1, 1, name='conv4_1')\
-             .conv(3, 3, 512, 1, 1, name='conv4_2')\
-             .conv(3, 3, 512, 1, 1, name='conv4_3')\
+             .conv(3, 3, 512, 1, 1, name='conv4_1')
+             .conv(3, 3, 512, 1, 1, name='conv4_2')
+             .conv(3, 3, 512, 1, 1, name='conv4_3')
              .max_pool(2, 2, 2, 2, padding='VALID', name='pool4')
-        self.feature['layer5']=self.feature['layer4']\
-        .conv(3, 3, 512, 1, 1, name='conv5_1')\
-        .conv(3, 3, 512, 1, 1, name='conv5_2')\
-        .conv(3, 3, 512, 1, 1, name='conv5_3')
-             
-             
-             
+             .conv(3, 3, 512, 1, 1, name='conv5_1')
+             .conv(3, 3, 512, 1, 1, name='conv5_2')
+             .conv(3, 3, 512, 1, 1, name='conv5_3'))
         #========= RPN ============
         (self.feed('conv5_3')
              .conv(3,3,512,1,1,name='rpn_conv/3x3'))
@@ -76,3 +70,6 @@ class VGGnet_train(Network):
         (self.feed('rpn_cls_score')
              .spatial_reshape_layer(2, name = 'rpn_cls_score_reshape')
              .spatial_softmax(name='rpn_cls_prob'))
+
+        print(self.layers.keys())
+        exit(-1)
