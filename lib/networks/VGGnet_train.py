@@ -86,7 +86,7 @@ class VGGnet_train(Network):
              .padding_and_concat(name='concat_pool4'))
 
         (self.feed('concat_pool4')
-            .conv(3, 3, 512, 1, 1,c_in=1024, name='concat_pool4_c1'))
+            .conv(3, 3, 512, 1, 1,c_i=1024, name='concat_pool4_c1'))
         # (self.feed('concat_pool4_c1')
         #     .conv(3, 3, 512, 1, 1, name='concat_pool4_c2'))
 
