@@ -161,17 +161,17 @@ class SolverWrapper(object):
             }
 
             debug_output=[self.net.data,
-                          self.net.layers['pool1'],
-                          self.net.layers['pool2'],
-                          self.net.layers['pool3'],
-                          self.net.layers['pool4'],
-                          self.net.layers['pool5'],
-                          self.net.layers['transpose_pool5'],
-                          self.net.layers['concat_pool4'],
-                          self.net.layers['concat_pool4_c1'],
-                          self.net.layers['concat_pool3'],
-                         self.net.layers['concat_pool2'],
-                         self.net.layers['concat_pool1'],
+                         #  self.net.layers['pool1'],
+                         #  self.net.layers['pool2'],
+                         #  self.net.layers['pool3'],
+                         #  self.net.layers['pool4'],
+                         #  self.net.layers['pool5'],
+                         #  self.net.layers['transpose_pool5'],
+                         #  self.net.layers['concat_pool4'],
+                         #  self.net.layers['concat_pool4_c1'],
+                         #  self.net.layers['concat_pool3'],
+                         # self.net.layers['concat_pool2'],
+                         # self.net.layers['concat_pool1'],
                          self.net.layers['logit'],
                           ]
             res_fetches=[]
