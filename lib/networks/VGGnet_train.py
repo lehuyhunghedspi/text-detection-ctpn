@@ -49,7 +49,7 @@ class VGGnet_train(Network):
              .conv(3, 3, 512, 1, 1, name='conv4_2')\
              .conv(3, 3, 512, 1, 1, name='conv4_3')\
              .max_pool(2, 2, 2, 2, padding='VALID', name='pool4')
-        self.feature['layer5']=self.feature['layer5']\
+        self.feature['layer5']=self.feature['layer4']\
         .conv(3, 3, 512, 1, 1, name='conv5_1')\
         .conv(3, 3, 512, 1, 1, name='conv5_2')\
         .conv(3, 3, 512, 1, 1, name='conv5_3')
