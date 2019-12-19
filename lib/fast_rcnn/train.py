@@ -172,7 +172,7 @@ class SolverWrapper(object):
                             'concat_pool4','concat_pool3','concat_pool2','concat_pool1','logit_mask']
             debug_output=[self.net.data]+[self.net.layers[l] for l in debug_layers]
             res_fetches=[]
-            fetch_list = [total_loss,model_loss, rpn_cross_entropy, rpn_loss_box,mask_loss
+            fetch_list = [total_loss,model_loss, rpn_cross_entropy, rpn_loss_box,mask_loss,
                           summary_op,
                           train_op] + res_fetches
 
