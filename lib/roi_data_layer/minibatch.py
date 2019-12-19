@@ -4,6 +4,7 @@ import cv2
 import os
 import re
 import copy
+import math
 from ..fast_rcnn.config import cfg
 from ..utils.blob import prep_im_for_blob, im_list_to_blob
 
@@ -59,7 +60,7 @@ def get_minibatch(roidb, num_classes):
 
         scale_x=raw_image.shape[0]/debug_img.shape[0]
         scale_y=raw_image.shape[1]/debug_img.shape[1]
-        mask=(np.zeros(im_blob.shape[1:])+np.array([[[0,0,1]]],dtype=np.uint8)).astype(np.uint8)
+        mask=(np.zeros((im_blob.shape[1],im_blob.shape[2]))).astype(np.uint8)
         
         color = (254, 254, 0)
         with open(raw_gt_file,"r") as f:
@@ -67,10 +68,15 @@ def get_minibatch(roidb, num_classes):
         
         for box in raw_boxs:
             cv2.line(mask, (int(box[0]/scale_x),int(box[1]/scale_y)),
-             (int(box[6]/scale_x),int(box[7]/scale_y)), (1,0,0), 5)
+             (int(box[6]/scale_x),int(box[7]/scale_y)), (1), 5)
             cv2.line(mask, (int(box[2]/scale_x),int(box[3]/scale_y)),
-             (int(box[4]/scale_x),int(box[5]/scale_y)), (0,1,0), 5)
+             (int(box[4]/scale_x),int(box[5]/scale_y)), (2), 5)
+
+        mask_new_height=(math.floor(mask.shape[0]/16)+1)*16
+        mask_new_width=(math.floor(mask.shape[1]/16)+1)*16
+        mask=np.pad(mask,[[0,mask_new_height-mask.shape[0]],[0,mask_new_width-mask.shape[1]],[0,0]])
         blobs['mask_label']=mask
+        print(mask.shape)
 
     else: # not using RPN
         # Now, build the region of interest and label blobs
