@@ -173,10 +173,10 @@ class SolverWrapper(object):
                           summary_op,
                           train_op] + res_fetches
 
-            # debug_output_resuslt=sess.run(fetches=debug_output, feed_dict=feed_dict)
+            debug_output_resuslt=sess.run(fetches=debug_output, feed_dict=feed_dict)
             
-            # for str_layer,a in zip(['input']+debug_layers,debug_output_resuslt):
-            #     print(str_layer,a.shape)
+            for str_layer,a in zip(['input']+debug_layers,debug_output_resuslt):
+                print(str_layer,a.shape)
 
             total_loss_val,model_loss_val, rpn_loss_cls_val, rpn_loss_box_val, \
                 summary_str, _ = sess.run(fetches=fetch_list, feed_dict=feed_dict)
