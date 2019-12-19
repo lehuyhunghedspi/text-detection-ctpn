@@ -414,7 +414,7 @@ class Network(object):
             return tf.nn.softmax(input,name=name)
     @layer
     def softmax_mask(self,input,name):
-        return tf.nn.softmax(input, axis=3,name=name)
+        return tf.nn.softmax(input, dim=3,name=name)
     @layer
     def spatial_softmax(self, input, name):
         input_shape = tf.shape(input)
