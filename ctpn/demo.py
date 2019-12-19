@@ -57,7 +57,7 @@ def ctpn(sess, net, image_name):
     img, scale = resize_im(img, scale=TextLineCfg.SCALE, max_scale=TextLineCfg.MAX_SCALE)
     scores, boxes,mask = test_ctpn(sess, net, img)
 
-    mask_class=np.argmax(mask,axis=-1)
+    mask_class=np.argmax(mask,axis=-1)[0]
 
     print(np.unique(mask_class))
     print(mask_class.shape,mask_class[0,1])
