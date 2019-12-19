@@ -15,9 +15,9 @@ def im_list_to_blob(ims):
         width=im.shape[1]
         new_height=16*(math.floor(height/16)+1)
         new_width=16*(math.floor(width/16)+1)
-        print(im.shape,new_height,new_width)
+        # print(im.shape,new_height,new_width)
         im=np.pad(im,[[0,new_height-height],[0,new_width-width],[0,0]],mode='edge')
-        print(im.shape)
+        # print(im.shape)
         img_padding.append(im)
     ims=img_padding
     max_shape = np.array([im.shape for im in ims]).max(axis=0)
