@@ -52,7 +52,7 @@ def get_minibatch(roidb, num_classes):
         raw_gt_file=os.path.join('/content/drive/My Drive/GR2/ctpn/0325updated.task1train(626p)',
             re.sub(".jpg|.png",".txt",blobs['im_name']))
 
-        print(blobs['im_name'])
+        # print(blobs['im_name'])
         raw_image_file=re.sub(".txt",".jpg",raw_gt_file)
 
         raw_image=cv2.imread(raw_image_file)
@@ -171,7 +171,7 @@ def _get_image_blob(roidb, scale_inds):
         target_size = cfg.TRAIN.SCALES[scale_inds[i]]
         im, im_scale = prep_im_for_blob(im, cfg.PIXEL_MEANS, target_size,
                                         cfg.TRAIN.MAX_SIZE)
-        print('preprocess image raw',im.shape)
+        # print('preprocess image raw',im.shape)
         # cv2.imwrite()
         im_scales.append(im_scale)
         processed_ims.append(im)
