@@ -160,6 +160,7 @@ class SolverWrapper(object):
                 self.net.dontcare_areas: blobs['dontcare_areas'],
                 self.net.mask_label: blobs['mask_label']
             }
+            print(blobs['mask_label'].shape,blobs['data'].shape)
 
 
             debug_layers=['conv1_1','conv1_2','pool1',
