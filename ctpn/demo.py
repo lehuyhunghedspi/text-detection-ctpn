@@ -60,6 +60,7 @@ def ctpn(sess, net, image_name):
     mask_class=np.argmax(mask,axis=-1)
 
     print(np.unique(mask_class))
+    print(mask_class.shape,mask_class[0,1])
     mask_class[mask_class == 1] = 125
 
     mask_class[mask_class == 2] = 255
