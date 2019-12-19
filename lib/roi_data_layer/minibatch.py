@@ -80,7 +80,7 @@ def get_minibatch(roidb, num_classes):
         mask=np.reshape(mask,[1,mask.shape[0],mask.shape[1]])
         blobs['mask_label']=mask
 
-        print(mask.shape)
+        # print(mask.shape)
 
     else: # not using RPN
         # Now, build the region of interest and label blobs
