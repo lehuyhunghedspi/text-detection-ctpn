@@ -485,7 +485,12 @@ class Network(object):
         rpn_cross_entropy = tf.reduce_mean(rpn_cross_entropy_n)
 
 
-        model_loss = rpn_cross_entropy +  rpn_loss_box
+        #mask loss
+        mask_logit=self.get_output('logit_mask')
+        mask_label=self.get_output('mask_label')
+        mask_loss=tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(labels=mask_label,logits=mask_logit))
+
+        model_loss = rpn_cross_entropy +  rpn_loss_box + mask_loss
 
         regularization_losses = tf.get_collection(tf.GraphKeys.REGULARIZATION_LOSSES)
         total_loss = tf.add_n(regularization_losses) + model_loss

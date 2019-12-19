@@ -13,14 +13,14 @@ class VGGnet_train(Network):
         self.gt_ishard = tf.placeholder(tf.int32, shape=[None], name='gt_ishard')
         self.dontcare_areas = tf.placeholder(tf.float32, shape=[None, 4], name='dontcare_areas')
         self.keep_prob = tf.placeholder(tf.float32)
-        self.gt_head_tail_mask=tf.placeholder(tf.int32, shape=[None,None,3], name='gt_head_tail_mask')
+        self.mask_label=tf.placeholder(tf.int32, shape=[None,None,3], name='mask_label')
         
         self.layers = dict({'data':self.data, 
                             'im_info':self.im_info,
                             'gt_boxes':self.gt_boxes,\
                             'gt_ishard': self.gt_ishard, 
                             'dontcare_areas': self.dontcare_areas,
-                            'gt_head_tail_mask':self.gt_head_tail_mask})
+                            'mask_label':self.gt_head_tail_mask})
         self.trainable = trainable
 
         self.setup()
@@ -124,7 +124,7 @@ class VGGnet_train(Network):
              .conv(3, 3, 64, 1, 1,c_i=64, name='concat_pool1_c2'))
 
         (self.feed('concat_pool1_c2')#x,x,64
-             .conv(3, 3, 2, 1, 1,c_i=64, name='logit',relu=False))
+             .conv(3, 3, 2, 1, 1,c_i=64, name='logit_mask',relu=False))
 
 
 
