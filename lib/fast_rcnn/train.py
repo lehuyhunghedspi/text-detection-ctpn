@@ -160,19 +160,30 @@ class SolverWrapper(object):
                 self.net.dontcare_areas: blobs['dontcare_areas']
             }
 
+
             debug_output=[self.net.data,
-                         #  self.net.layers['pool1'],
-                         #  self.net.layers['pool2'],
-                         #  self.net.layers['pool3'],
-                         #  self.net.layers['pool4'],
-                         #  self.net.layers['pool5'],
+                          self.net.layers['conv1_1'],
+                          self.net.layers['conv1_2'],
+                          self.net.layers['pool1'],
+                          self.net.layers['conv2_1'],
+                          self.net.layers['conv2_2'],
+                          self.net.layers['pool2'],
+                          self.net.layers['conv3_1'],
+                          self.net.layers['conv3_2'],
+                          self.net.layers['conv3_3'],
+                          self.net.layers['pool3'],
+                          self.net.layers['conv4_1'],
+                          self.net.layers['conv4_2'],
+                          self.net.layers['conv4_3'],
+                          self.net.layers['pool4'],
+                          self.net.layers['conv5_3'],
                          #  self.net.layers['transpose_pool5'],
                          #  self.net.layers['concat_pool4'],
                          #  self.net.layers['concat_pool4_c1'],
                          #  self.net.layers['concat_pool3'],
                          # self.net.layers['concat_pool2'],
                          # self.net.layers['concat_pool1'],
-                         self.net.layers['logit'],
+                         # self.net.layers['logit'],
                           ]
             res_fetches=[]
             fetch_list = [total_loss,model_loss, rpn_cross_entropy, rpn_loss_box,
