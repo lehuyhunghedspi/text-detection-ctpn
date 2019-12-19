@@ -76,6 +76,7 @@ def get_minibatch(roidb, num_classes):
         mask_new_width=(math.floor(mask.shape[1]/16)+1)*16
         mask=np.pad(mask,[[0,mask_new_height-mask.shape[0]],[0,mask_new_width-mask.shape[1]]])
         blobs['mask_label']=mask
+        mask=np.reshape(mask,[1,mask.shape[0],mask.shape[1],1])
         print(mask.shape)
 
     else: # not using RPN
