@@ -60,6 +60,10 @@ def ctpn(sess, net, image_name):
     mask_class=np.argmax(mask,axis=-1)
 
     print(np.unique(mask_class))
+    mask_class[mask_class == 1] = 125
+
+    mask_class[mask_class == 2] = 255
+    cv2.imwrite("/content/debug/mask_"+os.path.base_name(image_name),mask_class)
     textdetector = TextDetector()
     boxes = textdetector.detect(boxes, scores[:, np.newaxis], img.shape[:2])
     draw_boxes(img, image_name, boxes, scale)
@@ -112,6 +116,6 @@ if __name__ == '__main__':
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         print(im_name_count,len(im_names),('Demo for {:s}'.format(im_name)))
         ctpn(sess, net, im_name)
-        # if im_name_count==200:
-        #     break
+        if im_name_count==5:
+            break
 
