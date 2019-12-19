@@ -108,4 +108,4 @@ class VGGnet_test(Network):
              .conv(3, 3, 3, 1, 1,c_i=64, name='logit_mask',relu=False))
 
         (self.feed('logit_mask')#x,x,64
-             .softmax_mask(name='logit_mask'))
+             .softmax_mask(name='mask_prob_predict'))
