@@ -124,7 +124,7 @@ class VGGnet_train(Network):
              .conv(3, 3, 64, 1, 1,c_i=64, name='concat_pool1_c2'))
 
         (self.feed('concat_pool1_c2')#x,x,64
-             .conv(3, 3, 2, 1, 1,c_i=64, name='logit_mask',relu=False))
+             .conv(3, 3, 3, 1, 1,c_i=64, name='logit_mask',relu=False))
 
 
 

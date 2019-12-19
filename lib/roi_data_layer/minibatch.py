@@ -68,12 +68,12 @@ def get_minibatch(roidb, num_classes):
         
         for box in raw_boxs:
             cv2.line(mask, (int(box[0]/scale_x),int(box[1]/scale_y)),
-             (int(box[6]/scale_x),int(box[7]/scale_y)), (125), 5)
+             (int(box[6]/scale_x),int(box[7]/scale_y)), (1), 5)
             cv2.line(mask, (int(box[2]/scale_x),int(box[3]/scale_y)),
-             (int(box[4]/scale_x),int(box[5]/scale_y)), (255), 5)
+             (int(box[4]/scale_x),int(box[5]/scale_y)), (2), 5)
 
-        cv2.imwrite("/content/debug/mask.png",mask)
-        exit(-1)
+        # cv2.imwrite("/content/debug/mask.png",mask)
+        # exit(-1)
         mask_new_height=(math.floor(mask.shape[0]/16)+1)*16
         mask_new_width=(math.floor(mask.shape[1]/16)+1)*16
         # mask=np.pad(mask,[[0,mask_new_height-mask.shape[0]],[0,mask_new_width-mask.shape[1]]])
