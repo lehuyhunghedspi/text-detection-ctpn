@@ -53,3 +53,59 @@ class VGGnet_test(Network):
 
         (self.feed('rpn_cls_prob_reshape', 'rpn_bbox_pred', 'im_info')
          .proposal_layer(_feat_stride, anchor_scales, 'TEST', name='rois'))
+
+
+
+
+        #mask predict
+
+        (self.feed('conv5_3')
+             .transpose_conv(3,3,512,512,2,2,name='transpose_pool5'))
+
+        (self.feed('conv4_3','transpose_pool5')
+             .crop_and_concat(name='concat_pool4'))
+
+        (self.feed('concat_pool4')
+            .conv(3, 3, 512, 1, 1,c_i=1024, name='concat_pool4_c1'))
+        (self.feed('concat_pool4_c1')
+            .conv(3, 3, 512, 1, 1,c_i=512, name='concat_pool4_c2'))
+
+        (self.feed('concat_pool4_c2')
+             .transpose_conv(3,3,512,256,2,2,name='transpose_pool4'))
+
+        (self.feed('conv3_3','transpose_pool4')
+             .crop_and_concat(name='concat_pool3'))
+
+
+        (self.feed('concat_pool3')#x,x,512
+            .conv(3, 3, 256, 1, 1,c_i=512, name='concat_pool3_c1'))
+        (self.feed('concat_pool3_c1')
+            .conv(3, 3, 256, 1, 1,c_i=256, name='concat_pool3_c2'))
+        (self.feed('concat_pool3_c2')#x,x,256
+             .transpose_conv(3,3,256,128,2,2,name='transpose_pool3'))
+
+        (self.feed('conv2_2','transpose_pool3')
+             .crop_and_concat(name='concat_pool2'))
+
+
+        (self.feed('concat_pool2')#x,x,256
+            .conv(3, 3, 128, 1, 1,c_i=256, name='concat_pool2_c1'))
+        (self.feed('concat_pool2_c1')
+            .conv(3, 3, 128, 1, 1,c_i=128, name='concat_pool2_c2'))
+        (self.feed('concat_pool2_c2')#x,x,128
+             .transpose_conv(3,3,128,64,2,2,name='transpose_pool2'))
+
+        (self.feed('conv1_2','transpose_pool2')#x,x,128
+             .crop_and_concat(name='concat_pool1'))
+
+        (self.feed('concat_pool1')#x,x,128
+             .conv(3, 3, 64, 1, 1,c_i=128, name='concat_pool1_c1'))
+
+        (self.feed('concat_pool1_c1')#x,x,64
+             .conv(3, 3, 64, 1, 1,c_i=64, name='concat_pool1_c2'))
+
+        (self.feed('concat_pool1_c2')#x,x,64
+             .conv(3, 3, 3, 1, 1,c_i=64, name='logit_mask',relu=False))
+
+        (self.feed('logit_mask')#x,x,64
+             .softmax_mask(name='logit_mask'))
