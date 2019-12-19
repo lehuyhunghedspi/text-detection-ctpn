@@ -161,30 +161,12 @@ class SolverWrapper(object):
             }
 
 
-            debug_output=[self.net.data,
-                          self.net.layers['conv1_1'],
-                          self.net.layers['conv1_2'],
-                          self.net.layers['pool1'],
-                          self.net.layers['conv2_1'],
-                          self.net.layers['conv2_2'],
-                          self.net.layers['pool2'],
-                          self.net.layers['conv3_1'],
-                          self.net.layers['conv3_2'],
-                          self.net.layers['conv3_3'],
-                          self.net.layers['pool3'],
-                          self.net.layers['conv4_1'],
-                          self.net.layers['conv4_2'],
-                          self.net.layers['conv4_3'],
-                          self.net.layers['pool4'],
-                          self.net.layers['conv5_3'],
-                         #  self.net.layers['transpose_pool5'],
-                         #  self.net.layers['concat_pool4'],
-                         #  self.net.layers['concat_pool4_c1'],
-                         #  self.net.layers['concat_pool3'],
-                         # self.net.layers['concat_pool2'],
-                         # self.net.layers['concat_pool1'],
-                         # self.net.layers['logit'],
-                          ]
+            debug_layers=['conv1_1','conv1_2','pool1',
+                            'conv2_1','conv2_2','pool2',
+                            'conv3_1','conv3_2','conv3_3','pool3',
+                            'conv4_1','conv4_2','conv4_3','pool4',
+                            'conv5_1','conv5_2','conv5_3']
+            debug_output=[self.net.data]+[self.net.layers[l] for l in debug_layers]
             res_fetches=[]
             fetch_list = [total_loss,model_loss, rpn_cross_entropy, rpn_loss_box,
                           summary_op,
