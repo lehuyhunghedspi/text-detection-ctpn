@@ -51,7 +51,7 @@ def test_ctpn(sess, net, im, boxes=None):
 
     rois = sess.run([net.get_output('rois')[0]],feed_dict=feed_dict)
     mask = sess.run([net.get_output('mask_prob_predict')],feed_dict=feed_dict)
-    print('mask predict result',mask.shape)
+    print('mask predict result',mask[0].shape)
     rois=rois[0]
 
     scores = rois[:, 0]
