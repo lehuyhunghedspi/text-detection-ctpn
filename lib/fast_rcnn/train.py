@@ -165,7 +165,8 @@ class SolverWrapper(object):
                             'conv2_1','conv2_2','pool2',
                             'conv3_1','conv3_2','conv3_3','pool3',
                             'conv4_1','conv4_2','conv4_3','pool4',
-                            'conv5_1','conv5_2','conv5_3']
+                            'conv5_1','conv5_2','conv5_3',
+                            'concat_pool4','concat_pool3','concat_pool2','concat_pool1','logit']
             debug_output=[self.net.data]+[self.net.layers[l] for l in debug_layers]
             res_fetches=[]
             fetch_list = [total_loss,model_loss, rpn_cross_entropy, rpn_loss_box,
