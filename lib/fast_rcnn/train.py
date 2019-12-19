@@ -193,8 +193,8 @@ class SolverWrapper(object):
                         (iter, max_iters, total_loss_val,model_loss_val,rpn_loss_cls_val,rpn_loss_box_val,lr.eval()))
                 print('speed: {:.3f}s / iter'.format(_diff_time))
 
-            if (iter+1) % 10 == 0:
-            # if (iter+1) % cfg.TRAIN.SNAPSHOT_ITERS == 0:
+            # if (iter+1) % 10 == 0:
+            if (iter+1) % cfg.TRAIN.SNAPSHOT_ITERS == 0:
                 last_snapshot_iter = iter
                 self.snapshot(sess, iter)
 
