@@ -8,20 +8,23 @@ def im_list_to_blob(ims):
 
     Assumes images are already prepared (means subtracted, BGR order, ...).
     """
-    max_shape = np.array([im.shape for im in ims]).max(axis=0)
-    num_images = len(ims)
-    blob = np.zeros((num_images, max_shape[0], max_shape[1], 3),
-                    dtype=np.float32)
-    for i in range(num_images):
-        im = ims[i]
+    img_padding=[]
+    for im in ims:
         im_shape=im.shape
         
         height=im.shape[0]
         width=im.shape[1]
         new_height=16*(math.floor(height/16)+1)
         new_width=16*(math.floor(width/16)+1)
-        print(im.shape,new_width,new_height)
         im=np.pad(im,[[0,new_height-height],[0,new_width-width],[0,0]],mode='edge')
+        img_padding.append(im)
+    ims=img_padding
+    max_shape = np.array([im.shape for im in ims]).max(axis=0)
+    num_images = len(ims)
+    blob = np.zeros((num_images, max_shape[0], max_shape[1], 3),
+                    dtype=np.float32)
+    for i in range(num_images):
+        im = ims[i]
         blob[i, 0:im.shape[0], 0:im.shape[1], :] = im
         padding_size=[]
     return blob
