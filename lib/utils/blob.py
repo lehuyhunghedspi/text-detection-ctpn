@@ -21,7 +21,7 @@ def im_list_to_blob(ims):
         new_height=16*(math.floor(height/16)+1)
         new_width=16*(math.floor(width/16)+1)
         print(im.shape,new_width,new_height)
-        im=np.pad(im,[[0,new_height-height],[0,new_width-width]],mode='edge')
+        im=np.pad(im,[[0,new_height-height],[0,new_width-width],[0,0]],mode='edge')
         blob[i, 0:im.shape[0], 0:im.shape[1], :] = im
         padding_size=[]
     return blob
