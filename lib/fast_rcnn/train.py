@@ -79,12 +79,13 @@ class SolverWrapper(object):
     def train_model(self, sess, max_iters, restore=False):
         """Network training loop."""
         data_layer = get_data_layer(self.roidb, self.imdb.num_classes)
-        total_loss,model_loss, rpn_cross_entropy, rpn_loss_box=self.net.build_loss(ohem=cfg.TRAIN.OHEM)
+        total_loss,model_loss, rpn_cross_entropy, rpn_loss_box, mask_loss=self.net.build_loss(ohem=cfg.TRAIN.OHEM)
         # scalar summary
         tf.summary.scalar('rpn_reg_loss', rpn_loss_box)
         tf.summary.scalar('rpn_cls_loss', rpn_cross_entropy)
         tf.summary.scalar('model_loss', model_loss)
         tf.summary.scalar('total_loss',total_loss)
+        tf.summary.scalar('mask_loss',mask_loss)
         summary_op = tf.summary.merge_all()
 
         log_image, log_image_data, log_image_name =\
@@ -171,7 +172,7 @@ class SolverWrapper(object):
                             'concat_pool4','concat_pool3','concat_pool2','concat_pool1','logit_mask']
             debug_output=[self.net.data]+[self.net.layers[l] for l in debug_layers]
             res_fetches=[]
-            fetch_list = [total_loss,model_loss, rpn_cross_entropy, rpn_loss_box,
+            fetch_list = [total_loss,model_loss, rpn_cross_entropy, rpn_loss_box,mask_loss
                           summary_op,
                           train_op] + res_fetches
 
@@ -180,7 +181,7 @@ class SolverWrapper(object):
             # for str_layer,a in zip(['input']+debug_layers,debug_output_resuslt):
             #     print(str_layer,a.shape)
 
-            total_loss_val,model_loss_val, rpn_loss_cls_val, rpn_loss_box_val, \
+            total_loss_val,model_loss_val, rpn_loss_cls_val, rpn_loss_box_val,mask_loss_val, \
                 summary_str, _ = sess.run(fetches=fetch_list, feed_dict=feed_dict)
 
             self.writer.add_summary(summary=summary_str, global_step=global_step.eval())
@@ -189,8 +190,8 @@ class SolverWrapper(object):
 
 
             if (iter) % (cfg.TRAIN.DISPLAY) == 0:
-                print('iter: %d / %d, total loss: %.4f, model loss: %.4f, rpn_loss_cls: %.4f, rpn_loss_box: %.4f, lr: %f'%\
-                        (iter, max_iters, total_loss_val,model_loss_val,rpn_loss_cls_val,rpn_loss_box_val,lr.eval()))
+                print('iter: %d / %d, total loss: %.4f, model loss: %.4f, rpn_loss_cls: %.4f, rpn_loss_box: %.4f,mask_loss_val: %.4f, lr: %f'%\
+                        (iter, max_iters, total_loss_val,model_loss_val,rpn_loss_cls_val,rpn_loss_box_val,mask_loss_val,lr.eval()))
                 print('speed: {:.3f}s / iter'.format(_diff_time))
 
             # if (iter+1) % 10 == 0:
