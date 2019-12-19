@@ -13,7 +13,7 @@ class VGGnet_train(Network):
         self.gt_ishard = tf.placeholder(tf.int32, shape=[None], name='gt_ishard')
         self.dontcare_areas = tf.placeholder(tf.float32, shape=[None, 4], name='dontcare_areas')
         self.keep_prob = tf.placeholder(tf.float32)
-        self.mask_label=tf.placeholder(tf.int32, shape=[None,None], name='mask_label')
+        self.mask_label=tf.placeholder(tf.int32, shape=[None,None,None], name='mask_label')
         
         self.layers = dict({'data':self.data, 
                             'im_info':self.im_info,
