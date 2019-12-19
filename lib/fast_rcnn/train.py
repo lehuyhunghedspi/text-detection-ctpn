@@ -157,7 +157,8 @@ class SolverWrapper(object):
                 self.net.keep_prob: 0.5,
                 self.net.gt_boxes: blobs['gt_boxes'],
                 self.net.gt_ishard: blobs['gt_ishard'],
-                self.net.dontcare_areas: blobs['dontcare_areas']
+                self.net.dontcare_areas: blobs['dontcare_areas'],
+                self.net.mask_label: blobs['mask_label']
             }
 
 

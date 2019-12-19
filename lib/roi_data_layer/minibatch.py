@@ -70,7 +70,7 @@ def get_minibatch(roidb, num_classes):
              (int(box[6]/scale_x),int(box[7]/scale_y)), (1,0,0), 5)
             cv2.line(mask, (int(box[2]/scale_x),int(box[3]/scale_y)),
              (int(box[4]/scale_x),int(box[5]/scale_y)), (0,1,0), 5)
-        blobs['head_tail_mask']=mask
+        blobs['mask_label']=mask
 
     else: # not using RPN
         # Now, build the region of interest and label blobs

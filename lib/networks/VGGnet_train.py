@@ -20,7 +20,7 @@ class VGGnet_train(Network):
                             'gt_boxes':self.gt_boxes,\
                             'gt_ishard': self.gt_ishard, 
                             'dontcare_areas': self.dontcare_areas,
-                            'mask_label':self.gt_head_tail_mask})
+                            'mask_label':self.mask_label})
         self.trainable = trainable
 
         self.setup()
