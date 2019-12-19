@@ -55,8 +55,11 @@ def ctpn(sess, net, image_name):
 
     img = cv2.imread(image_name)
     img, scale = resize_im(img, scale=TextLineCfg.SCALE, max_scale=TextLineCfg.MAX_SCALE)
-    scores, boxes = test_ctpn(sess, net, img)
+    scores, boxes,mask = test_ctpn(sess, net, img)
 
+    mask_class=np.argmax(mask,axis=-1)
+
+    print(np.unique(mask_class))
     textdetector = TextDetector()
     boxes = textdetector.detect(boxes, scores[:, np.newaxis], img.shape[:2])
     draw_boxes(img, image_name, boxes, scale)

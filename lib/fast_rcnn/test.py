@@ -50,12 +50,12 @@ def test_ctpn(sess, net, im, boxes=None):
         feed_dict = {net.data: blobs['data'], net.im_info: blobs['im_info'], net.keep_prob: 1.0}
 
     rois = sess.run([net.get_output('rois')[0]],feed_dict=feed_dict)
-    mask = sess.run([net.get_output('mask_prob_predict')],feed_dict=feed_dict)
-    print('mask predict result',mask[0].shape)
+    mask = sess.run([net.get_output('mask_prob_predict')],feed_dict=feed_dict)[0]
+   
     rois=rois[0]
 
     scores = rois[:, 0]
     if cfg.TEST.HAS_RPN:
         assert len(im_scales) == 1, "Only single-image batch implemented"
         boxes = rois[:, 1:5] / im_scales[0]
-    return scores,boxes
+    return scores,boxes,mask
