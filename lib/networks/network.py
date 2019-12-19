@@ -6,7 +6,8 @@ from ..rpn_msr.proposal_layer_tf import proposal_layer as proposal_layer_py
 from ..rpn_msr.anchor_target_layer_tf import anchor_target_layer as anchor_target_layer_py
 
 
-DEFAULT_PADDING = 'SAME'
+#DEFAULT_PADDING = 'SAME'
+DEFAULT_PADDING = 'VALID'
 
 def layer(op):
     def layer_decorated(self, *args, **kwargs):
