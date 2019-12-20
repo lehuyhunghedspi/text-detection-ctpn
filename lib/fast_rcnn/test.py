@@ -58,4 +58,4 @@ def test_ctpn(sess, net, im, boxes=None):
     if cfg.TEST.HAS_RPN:
         assert len(im_scales) == 1, "Only single-image batch implemented"
         boxes = rois[:, 1:5] / im_scales[0]
-    return scores,boxes,mask
+    return scores,boxes,mask,blobs
