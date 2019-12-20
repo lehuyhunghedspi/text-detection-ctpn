@@ -102,8 +102,8 @@ if __name__ == '__main__':
         print(cfg.TEST.checkpoints_path)
         ckpt = tf.train.get_checkpoint_state(cfg.TEST.checkpoints_path)
         print(ckpt)
-        print('Restoring from {}...'.format("/content/text-detection-ctpn/checkpoints/VGGnet_fast_rcnn_iter_20.ckpt"), end=' ')
-        saver.restore(sess,"/content/text-detection-ctpn/checkpoints/VGGnet_fast_rcnn_iter_20.ckpt" )
+        print('Restoring from {}...'.format("/content/text-detection-ctpn/checkpoints/VGGnet_fast_rcnn_iter_10500.ckpt"), end=' ')
+        saver.restore(sess,"/content/text-detection-ctpn/checkpoints/VGGnet_fast_rcnn_iter_10500.ckpt" )
         print('done')
     except:
         raise 'Check your pretrained {:s}'.format(ckpt.model_checkpoint_path)
