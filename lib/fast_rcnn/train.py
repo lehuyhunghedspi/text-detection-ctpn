@@ -195,7 +195,7 @@ class SolverWrapper(object):
                 print('speed: {:.3f}s / iter'.format(_diff_time))
 
             # if (iter+1) % 10 == 0:
-            if (iter+1) % 1000 == 0:
+            if (iter+1) % 2000 == 0:
                 last_snapshot_iter = iter
                 self.snapshot(sess, iter)
 
