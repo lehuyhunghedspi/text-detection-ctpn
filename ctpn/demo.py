@@ -66,6 +66,12 @@ def ctpn(sess, net, image_name):
     mask_class[mask_class == 2] = 255
     print(np.unique(mask_class))
     print(mask_class.shape,'====')
+    
+    start_map=(mask_class=125).astype(np.int)*255
+    end_map=(mask_class=255).astype(np.int)*255
+    visualize_map=np.stack([start_map,end_map,np.zeros(mask_class.shape)], axis=0)
+    print(visualize_map.shape)
+    
     cv2.imwrite("/content/debug/mask_"+os.path.basename(image_name),mask_class)
     textdetector = TextDetector()
     boxes = textdetector.detect(boxes, scores[:, np.newaxis], img.shape[:2])
