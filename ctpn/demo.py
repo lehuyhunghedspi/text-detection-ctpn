@@ -72,7 +72,7 @@ def ctpn(sess, net, image_name):
     visualize_map=np.stack([start_map,end_map,np.zeros(mask_class.shape)], axis=-1)
     print(visualize_map.shape)
 
-    visualize_map=np.clip(visualize_map+blobs['data'],0,255)
+    # visualize_map=np.clip(visualize_map+blobs['data'],0,255)
     cv2.imwrite("/content/debug/mask_"+os.path.basename(image_name),visualize_map)
     textdetector = TextDetector()
     boxes = textdetector.detect(boxes, scores[:, np.newaxis], img.shape[:2])
